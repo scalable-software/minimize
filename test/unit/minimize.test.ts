@@ -260,6 +260,29 @@ state(State.VISIBILITY, () => {
               expect(minimize.visibility).toBe(Visibility.HIDDEN);
             });
           });
+
+          when("`minimize.visibility` is set to `invalid`", () => {
+            let error: Error;
+            beforeEach(() => {
+              try {
+                // @ts-expect-error
+                minimize.visibility = "invalid";
+              } catch (err) {
+                error = err as Error;
+              }
+            });
+
+            then("an error is thrown", () => {
+              expect(error).toBeDefined();
+            });
+
+            then(
+              "error message contains 'Invalid visibility value: invalid'",
+              () => {
+                expect(error.message).toBe("Invalid visibility value: invalid");
+              }
+            );
+          });
         });
       });
     });
