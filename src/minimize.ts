@@ -101,6 +101,13 @@ export class Minimize extends Component implements Meta {
   private _onshow: EventListener | null = null;
 
   /**
+   * onminimize triggered each time minimizing is requested
+   * @category Events
+   * @hidden
+   */
+  private _onminimize: EventListener | null = null;
+
+  /**
    * Cache element references to improve performance
    * @category State
    * @hidden
@@ -200,6 +207,19 @@ export class Minimize extends Component implements Meta {
    */
   public set onshow(handler: EventListener | null) {
     this._onshow = this._subscribe(Event.ON_SHOW, this._onshow, handler);
+  }
+
+  /**
+   * Triggered via `.minimize()`
+   * @event
+   * @category Events
+   */
+  public set onminimize(handler: EventListener | null) {
+    this._onminimize = this._subscribe(
+      Event.ON_MINIMIZE,
+      this._onminimize,
+      handler
+    );
   }
 
   /**
