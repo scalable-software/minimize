@@ -59,8 +59,10 @@ This walkthrough uses the demo page to show how `<minimize-button>` behaves, bef
 3. **Press** again, **move the pointer away**, and then let go.
    - `status` returns to `released` the moment the pointer leaves, and no `onminimize` is logged: you changed your mind.
 
-4. **Press the Tab key** until the button has focus, then press **Enter** or the **space bar**.
-   - Each key press logs one `onminimize`.
+4. **Press the Tab key** until the button has focus, then **hold down Enter** or the **space bar**.
+   - It looks pressed, `status` shows `pressed`, and the page does not scroll. No `onminimize` is logged while the key is held.
+   - **Lift the key**: `status` returns to `released`, and one `onminimize` is logged.
+   - Hold the key down again and **press Tab** to move the focus away: `status` returns to `released`, and no `onminimize` is logged.
 
 5. **Click** the `minimize` button in the **Operations** group.
    - The host application can make the same request from code. Every call logs one `onminimize`, and no state changes.
@@ -97,7 +99,7 @@ For more details on **States**, **Operations**, and **Events**, consult the sect
 
 ### 3.1 Composition
 
-- **Template** (`minimize.template.html`): Defines DOM structure — a `.icon` container, focusable and announced as a button, holding the SVG icon of a single horizontal line.
+- **Template** (`minimize.template.html`): Defines DOM structure — a `.icon` container, focusable and announced as a button named "Minimize", holding the SVG icon of a single horizontal line.
 - **Style** (`minimize.style.css`): Encapsulates appearance, including the pressed look, hover effects, the flat appearance, and light/dark theme adaptation.
 - **Class** (`minimize.ts`): Extends the base component class to handle lifecycle hooks, Shadow DOM creation, attribute reflection, and event dispatch.
 
@@ -116,7 +118,7 @@ Lifecycle methods are implemented in the base class and extended by the **Minimi
   2. Clones the HTML template into the Shadow Root.
   3. Inserts a `<link>` for scoped CSS.
   4. Initialises default state attributes.
-  5. Sets up event listeners on the icon: the pointer going down, being lifted and leaving, a click, and a key press.
+  5. Sets up event listeners on the icon: the pointer going down, being lifted and leaving, a click, a key going down and being lifted, and the loss of focus.
 
 - **`disconnectedCallback()`**
   - Removes the event listeners.
@@ -138,7 +140,7 @@ The **Minimize** component uses both **internal properties** and **DOM attribute
   - **Optional attribute**: absent from the DOM when `visible` (the default); present as `[visibility="hidden"]` on the host element when hidden.
 
 - **`status`** (`released` | `pressed`) — **readonly**
-  - Whether the control is being pressed. It is `pressed` from the moment the pointer goes down on the icon until it is lifted or leaves the icon, and `released` at all other times.
+  - Whether the control is being pressed. It is `pressed` from the moment the pointer goes down on the icon until it is lifted or leaves the icon, and from the moment Enter or Space goes down on the focused icon until the key is lifted or the icon loses focus. It is `released` at all other times.
   - **Compulsory attribute**: always present in the DOM, reflecting the current state at all times, so a stylesheet can select on `[status="pressed"]`.
   - Only the component changes it. Assigning the property does not compile in TypeScript, and a `status` attribute that is set or removed from outside is put back to the current state without an error.
 
@@ -294,7 +296,9 @@ What the end user does on the icon, and what it leads to.
 | `pointerup` | the pointer is lifted | `status` becomes `released` |
 | `pointerleave` | the pointer leaves | `status` becomes `released`, and no request is made |
 | `click` | the pointer is pressed and lifted on the icon | `minimize()` |
-| `keydown` | Enter or Space is pressed while the icon has focus | `minimize()` |
+| `keydown` | Enter or Space goes down while the icon has focus | `status` becomes `pressed`, and the page does not scroll |
+| `keyup` | Enter or Space is lifted while the icon has focus | `minimize()` when the control is pressed, then `status` becomes `released` |
+| `blur` | the icon loses focus | `status` becomes `released`, and no request is made |
 | `hover` | the pointer is over the icon | a change of background, border, shadow and fill, in CSS only |
 
 Pressing and releasing are not offered to the outside: the component has no `press` or `release` operation.
@@ -413,7 +417,7 @@ customElements.define(Minimize.Tag, Minimize);
 ## 6. Best Practices & Extensibility
 
 1. **Requests, not actions** — `onminimize` says that minimizing was asked for. The host application decides what that means and does it.
-2. **Accessibility** — The icon can be reached with the Tab key, is announced as a button, and is operated with Enter or the space bar. It has no accessible name of its own yet; consider an `aria-label` for that.
+2. **Accessibility** — The icon can be reached with the Tab key, is announced as a button named "Minimize" through its `aria-label`, and is operated with Enter or the space bar: it is pressed while the key is held, and the request is made when the key is lifted.
 3. **Testing** — Simulate pointer presses, clicks and key presses to confirm correct state transitions and event dispatch.
 4. **Documentation** — Provide real usage snippets (like the Quick Start above) for developer onboarding.
 5. **Publishing** — Use semantic versioning to manage features and breaking changes; employ CI/CD for automated build, test, and publish.

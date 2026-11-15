@@ -128,6 +128,10 @@ composition(Composition.TEMPLATE, () => {
             then("`div.icon` has `role` `button`", () => {
               expect(div.getAttribute("role")).toBe("button");
             });
+
+            then("`div.icon` has `aria-label` `Minimize`", () => {
+              expect(div.getAttribute("aria-label")).toBe("Minimize");
+            });
           });
         });
       });
@@ -1522,6 +1526,70 @@ gesture(Gesture.KEYDOWN, () => {
 
         when("user presses `Key.ENTER` on `div` with class `icon`", () => {
           let onminimize: jasmine.Spy;
+          let event: KeyboardEvent;
+          beforeEach(() => {
+            onminimize = jasmine.createSpy("onminimize");
+            minimize.onminimize = onminimize;
+            const icon = minimize.root.querySelector(".icon") as HTMLElement;
+            event = new KeyboardEvent(Gesture.KEYDOWN, {
+              key: Key.ENTER,
+              cancelable: true
+            });
+            icon.dispatchEvent(event);
+          });
+
+          then("`minimize.status` is `Status.PRESSED`", () => {
+            expect(minimize.status).toEqual(Status.PRESSED);
+          });
+
+          then("`status` attribute is `Status.PRESSED`", () => {
+            const value = minimize.getAttribute(Attributes.STATUS);
+            expect(value).toBe(Status.PRESSED);
+          });
+
+          then("`onminimize` is not called", () => {
+            expect(onminimize).not.toHaveBeenCalled();
+          });
+
+          then("the default action of the key is prevented", () => {
+            expect(event.defaultPrevented).toBeTrue();
+          });
+        });
+
+        when("user presses `Key.SPACE` on `div` with class `icon`", () => {
+          let onminimize: jasmine.Spy;
+          let event: KeyboardEvent;
+          beforeEach(() => {
+            onminimize = jasmine.createSpy("onminimize");
+            minimize.onminimize = onminimize;
+            const icon = minimize.root.querySelector(".icon") as HTMLElement;
+            event = new KeyboardEvent(Gesture.KEYDOWN, {
+              key: Key.SPACE,
+              cancelable: true
+            });
+            icon.dispatchEvent(event);
+          });
+
+          then("`minimize.status` is `Status.PRESSED`", () => {
+            expect(minimize.status).toEqual(Status.PRESSED);
+          });
+
+          then("`status` attribute is `Status.PRESSED`", () => {
+            const value = minimize.getAttribute(Attributes.STATUS);
+            expect(value).toBe(Status.PRESSED);
+          });
+
+          then("`onminimize` is not called", () => {
+            expect(onminimize).not.toHaveBeenCalled();
+          });
+
+          then("the default action of the key is prevented", () => {
+            expect(event.defaultPrevented).toBeTrue();
+          });
+        });
+
+        when("user holds `Key.ENTER` down on `div` with class `icon`", () => {
+          let onminimize: jasmine.Spy;
           beforeEach(() => {
             onminimize = jasmine.createSpy("onminimize");
             minimize.onminimize = onminimize;
@@ -1529,40 +1597,323 @@ gesture(Gesture.KEYDOWN, () => {
             icon.dispatchEvent(
               new KeyboardEvent(Gesture.KEYDOWN, { key: Key.ENTER })
             );
+            icon.dispatchEvent(
+              new KeyboardEvent(Gesture.KEYDOWN, { key: Key.ENTER, repeat: true })
+            );
+            icon.dispatchEvent(
+              new KeyboardEvent(Gesture.KEYDOWN, { key: Key.ENTER, repeat: true })
+            );
           });
 
-          then("`onminimize` is called", () => {
-            expect(onminimize).toHaveBeenCalled();
+          then("`minimize.status` is `Status.PRESSED`", () => {
+            expect(minimize.status).toEqual(Status.PRESSED);
+          });
+
+          then("`onminimize` is not called", () => {
+            expect(onminimize).not.toHaveBeenCalled();
           });
         });
 
-        when("user presses `Key.SPACE` on `div` with class `icon`", () => {
+        when("user presses another key on `div` with class `icon`", () => {
           let onminimize: jasmine.Spy;
+          let event: KeyboardEvent;
           beforeEach(() => {
             onminimize = jasmine.createSpy("onminimize");
             minimize.onminimize = onminimize;
+            const icon = minimize.root.querySelector(".icon") as HTMLElement;
+            event = new KeyboardEvent(Gesture.KEYDOWN, {
+              key: "a",
+              cancelable: true
+            });
+            icon.dispatchEvent(event);
+          });
+
+          then("`onminimize` is not called", () => {
+            expect(onminimize).not.toHaveBeenCalled();
+          });
+
+          then("`minimize.status` is `Status.RELEASED`", () => {
+            expect(minimize.status).toEqual(Status.RELEASED);
+          });
+
+          then("the default action of the key is not prevented", () => {
+            expect(event.defaultPrevented).toBeFalse();
+          });
+        });
+      });
+    });
+  });
+});
+
+gesture(Gesture.KEYUP, () => {
+  and("Minimize is defined in custom element registry", () => {
+    beforeEach(() => {
+      define(Minimize.Tag, Minimize);
+    });
+
+    and("HTML Template is added to DOM", () => {
+      beforeEach(async () => {
+        await Minimize.Template.load("minimize.template.html");
+      });
+      afterEach(() => {
+        remove(Minimize.Tag);
+      });
+
+      and("a new minimize is added to DOM", () => {
+        let minimize: Minimize;
+        beforeEach(() => {
+          minimize = add<Minimize>(Minimize.Tag);
+        });
+        afterEach(() => {
+          minimize.remove();
+        });
+
+        and("user presses `Key.ENTER` on `div` with class `icon`", () => {
+          beforeEach(() => {
+            const icon = minimize.root.querySelector(".icon") as HTMLElement;
+            icon.dispatchEvent(
+              new KeyboardEvent(Gesture.KEYDOWN, { key: Key.ENTER })
+            );
+          });
+
+          when("user lifts `Key.ENTER` from `div` with class `icon`", () => {
+            let onminimize: jasmine.Spy;
+            beforeEach(() => {
+              onminimize = jasmine.createSpy("onminimize");
+              minimize.onminimize = onminimize;
+              const icon = minimize.root.querySelector(".icon") as HTMLElement;
+              icon.dispatchEvent(
+                new KeyboardEvent(Gesture.KEYUP, { key: Key.ENTER })
+              );
+            });
+
+            then("`onminimize` is called once", () => {
+              expect(onminimize).toHaveBeenCalledTimes(1);
+            });
+
+            then("`minimize.status` is `Status.RELEASED`", () => {
+              expect(minimize.status).toEqual(Status.RELEASED);
+            });
+
+            then("`status` attribute is `Status.RELEASED`", () => {
+              const value = minimize.getAttribute(Attributes.STATUS);
+              expect(value).toBe(Status.RELEASED);
+            });
+          });
+        });
+
+        and("user presses `Key.SPACE` on `div` with class `icon`", () => {
+          beforeEach(() => {
             const icon = minimize.root.querySelector(".icon") as HTMLElement;
             icon.dispatchEvent(
               new KeyboardEvent(Gesture.KEYDOWN, { key: Key.SPACE })
             );
           });
 
-          then("`onminimize` is called", () => {
-            expect(onminimize).toHaveBeenCalled();
+          when("user lifts `Key.SPACE` from `div` with class `icon`", () => {
+            let onminimize: jasmine.Spy;
+            beforeEach(() => {
+              onminimize = jasmine.createSpy("onminimize");
+              minimize.onminimize = onminimize;
+              const icon = minimize.root.querySelector(".icon") as HTMLElement;
+              icon.dispatchEvent(
+                new KeyboardEvent(Gesture.KEYUP, { key: Key.SPACE })
+              );
+            });
+
+            then("`onminimize` is called once", () => {
+              expect(onminimize).toHaveBeenCalledTimes(1);
+            });
+
+            then("`minimize.status` is `Status.RELEASED`", () => {
+              expect(minimize.status).toEqual(Status.RELEASED);
+            });
+
+            then("`status` attribute is `Status.RELEASED`", () => {
+              const value = minimize.getAttribute(Attributes.STATUS);
+              expect(value).toBe(Status.RELEASED);
+            });
           });
         });
 
-        when("user presses another key on `div` with class `icon`", () => {
+        when("user lifts `Key.ENTER` from `div` with class `icon` without pressing it", () => {
           let onminimize: jasmine.Spy;
           beforeEach(() => {
             onminimize = jasmine.createSpy("onminimize");
             minimize.onminimize = onminimize;
             const icon = minimize.root.querySelector(".icon") as HTMLElement;
-            icon.dispatchEvent(new KeyboardEvent(Gesture.KEYDOWN, { key: "a" }));
+            icon.dispatchEvent(new KeyboardEvent(Gesture.KEYUP, { key: Key.ENTER }));
           });
 
           then("`onminimize` is not called", () => {
             expect(onminimize).not.toHaveBeenCalled();
+          });
+
+          then("`minimize.status` is `Status.RELEASED`", () => {
+            expect(minimize.status).toEqual(Status.RELEASED);
+          });
+        });
+
+        when("user lifts `Key.SPACE` from `div` with class `icon` without pressing it", () => {
+          let onminimize: jasmine.Spy;
+          beforeEach(() => {
+            onminimize = jasmine.createSpy("onminimize");
+            minimize.onminimize = onminimize;
+            const icon = minimize.root.querySelector(".icon") as HTMLElement;
+            icon.dispatchEvent(new KeyboardEvent(Gesture.KEYUP, { key: Key.SPACE }));
+          });
+
+          then("`onminimize` is not called", () => {
+            expect(onminimize).not.toHaveBeenCalled();
+          });
+
+          then("`minimize.status` is `Status.RELEASED`", () => {
+            expect(minimize.status).toEqual(Status.RELEASED);
+          });
+        });
+
+        and("user presses `Key.ENTER` on `div` with class `icon`", () => {
+          beforeEach(() => {
+            const icon = minimize.root.querySelector(".icon") as HTMLElement;
+            icon.dispatchEvent(
+              new KeyboardEvent(Gesture.KEYDOWN, { key: Key.ENTER })
+            );
+          });
+
+          when("user lifts another key from `div` with class `icon`", () => {
+            let onminimize: jasmine.Spy;
+            beforeEach(() => {
+              onminimize = jasmine.createSpy("onminimize");
+              minimize.onminimize = onminimize;
+              const icon = minimize.root.querySelector(".icon") as HTMLElement;
+              icon.dispatchEvent(new KeyboardEvent(Gesture.KEYUP, { key: "a" }));
+            });
+
+            then("`onminimize` is not called", () => {
+              expect(onminimize).not.toHaveBeenCalled();
+            });
+
+            then("`minimize.status` is `Status.PRESSED`", () => {
+              expect(minimize.status).toEqual(Status.PRESSED);
+            });
+          });
+        });
+
+        and("user holds `Key.ENTER` down on `div` with class `icon`", () => {
+          beforeEach(() => {
+            const icon = minimize.root.querySelector(".icon") as HTMLElement;
+            icon.dispatchEvent(
+              new KeyboardEvent(Gesture.KEYDOWN, { key: Key.ENTER })
+            );
+            icon.dispatchEvent(
+              new KeyboardEvent(Gesture.KEYDOWN, { key: Key.ENTER, repeat: true })
+            );
+            icon.dispatchEvent(
+              new KeyboardEvent(Gesture.KEYDOWN, { key: Key.ENTER, repeat: true })
+            );
+          });
+
+          when("user lifts `Key.ENTER` from `div` with class `icon`", () => {
+            let onminimize: jasmine.Spy;
+            beforeEach(() => {
+              onminimize = jasmine.createSpy("onminimize");
+              minimize.onminimize = onminimize;
+              const icon = minimize.root.querySelector(".icon") as HTMLElement;
+              icon.dispatchEvent(
+                new KeyboardEvent(Gesture.KEYUP, { key: Key.ENTER })
+              );
+            });
+
+            then("`onminimize` is called once", () => {
+              expect(onminimize).toHaveBeenCalledTimes(1);
+            });
+          });
+        });
+
+        and("user presses `Key.ENTER` on `div` with class `icon`", () => {
+          beforeEach(() => {
+            const icon = minimize.root.querySelector(".icon") as HTMLElement;
+            icon.dispatchEvent(
+              new KeyboardEvent(Gesture.KEYDOWN, { key: Key.ENTER })
+            );
+          });
+
+          when("user lifts `Key.ENTER` from `div` with class `icon` twice", () => {
+            let onminimize: jasmine.Spy;
+            beforeEach(() => {
+              onminimize = jasmine.createSpy("onminimize");
+              minimize.onminimize = onminimize;
+              const icon = minimize.root.querySelector(".icon") as HTMLElement;
+              icon.dispatchEvent(
+                new KeyboardEvent(Gesture.KEYUP, { key: Key.ENTER })
+              );
+              icon.dispatchEvent(
+                new KeyboardEvent(Gesture.KEYUP, { key: Key.ENTER })
+              );
+            });
+
+            then("`onminimize` is called once", () => {
+              expect(onminimize).toHaveBeenCalledTimes(1);
+            });
+          });
+        });
+      });
+    });
+  });
+});
+
+gesture(Gesture.BLUR, () => {
+  and("Minimize is defined in custom element registry", () => {
+    beforeEach(() => {
+      define(Minimize.Tag, Minimize);
+    });
+
+    and("HTML Template is added to DOM", () => {
+      beforeEach(async () => {
+        await Minimize.Template.load("minimize.template.html");
+      });
+      afterEach(() => {
+        remove(Minimize.Tag);
+      });
+
+      and("a new minimize is added to DOM", () => {
+        let minimize: Minimize;
+        beforeEach(() => {
+          minimize = add<Minimize>(Minimize.Tag);
+        });
+        afterEach(() => {
+          minimize.remove();
+        });
+
+        and("user presses `Key.ENTER` on `div` with class `icon`", () => {
+          beforeEach(() => {
+            const icon = minimize.root.querySelector(".icon") as HTMLElement;
+            icon.dispatchEvent(
+              new KeyboardEvent(Gesture.KEYDOWN, { key: Key.ENTER })
+            );
+          });
+
+          when("`div` with class `icon` loses focus", () => {
+            let onminimize: jasmine.Spy;
+            beforeEach(() => {
+              onminimize = jasmine.createSpy("onminimize");
+              minimize.onminimize = onminimize;
+              const icon = minimize.root.querySelector(".icon") as HTMLElement;
+              icon.dispatchEvent(new FocusEvent(Gesture.BLUR));
+            });
+
+            then("`minimize.status` is `Status.RELEASED`", () => {
+              expect(minimize.status).toEqual(Status.RELEASED);
+            });
+
+            then("`status` attribute is `Status.RELEASED`", () => {
+              const value = minimize.getAttribute(Attributes.STATUS);
+              expect(value).toBe(Status.RELEASED);
+            });
+
+            then("`onminimize` is not called", () => {
+              expect(onminimize).not.toHaveBeenCalled();
+            });
           });
         });
       });
