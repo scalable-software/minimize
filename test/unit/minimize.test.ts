@@ -855,6 +855,18 @@ operation(Operation.MINIMIZE, () => {
               then("`minimize.minimize` returns nothing", () => {
                 expect(result).toBeUndefined();
               });
+
+              then("`minimize.visibility` is `Visibility.VISIBLE`", () => {
+                expect(minimize.visibility).toBe(Visibility.VISIBLE);
+              });
+
+              then("`minimize.status` is `Status.RELEASED`", () => {
+                expect(minimize.status).toBe(Status.RELEASED);
+              });
+
+              then("`minimize.appearance` is `Appearance.FLOATING`", () => {
+                expect(minimize.appearance).toBe(Appearance.FLOATING);
+              });
             });
 
             when("invoking `minimize.minimize` twice", () => {
