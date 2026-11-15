@@ -591,6 +591,16 @@ state(State.APPEARANCE, () => {
             });
           });
 
+          when("`appearance` attribute is set to `Appearance.FLAT`", () => {
+            beforeEach(() => {
+              minimize.setAttribute(Attributes.APPEARANCE, Appearance.FLAT);
+            });
+
+            then("`minimize.appearance` is `Appearance.FLAT`", () => {
+              expect(minimize.appearance).toBe(Appearance.FLAT);
+            });
+          });
+
           when("`minimize.appearance` is set to `invalid`", () => {
             let error: Error;
             beforeEach(() => {
