@@ -1118,4 +1118,35 @@ events(Event.ON_SHOW, () => {
   });
 });
 
+events(Event.ON_MINIMIZE, () => {
+  and("Minimize is defined in custom element registry", () => {
+    beforeEach(() => {
+      define(Minimize.Tag, Minimize);
+    });
+
+    and("HTML Template is added to DOM", () => {
+      beforeEach(async () => {
+        await Minimize.Template.load("minimize.template.html");
+      });
+      afterEach(() => {
+        remove(Minimize.Tag);
+      });
+
+      and("a new minimize is added to DOM", () => {
+        let minimize: Minimize;
+        beforeEach(() => {
+          minimize = add<Minimize>(Minimize.Tag);
+        });
+        afterEach(() => {
+          minimize.remove();
+        });
+
+        then("`minimize.onminimize` setter exists", () => {
+          expect(hasSetter(minimize, Event.ON_MINIMIZE)).toBeTrue();
+        });
+      });
+    });
+  });
+});
+
 // Gesture
