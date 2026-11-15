@@ -158,6 +158,49 @@ composition(Composition.CSS, () => {
   });
 });
 
+composition(Composition.ELEMENT, () => {
+  and("Minimize is defined in custom element registry", () => {
+    beforeEach(() => {
+      define(Minimize.Tag, Minimize);
+    });
+
+    and("HTML Template is added to DOM", () => {
+      beforeEach(async () => {
+        await Minimize.Template.load("minimize.template.html");
+      });
+      afterEach(() => {
+        remove(Minimize.Tag);
+      });
+
+      and("a new minimize is added to DOM", () => {
+        let minimize: Minimize;
+        beforeEach(() => {
+          minimize = add<Minimize>(Minimize.Tag);
+        });
+        afterEach(() => {
+          minimize.remove();
+        });
+
+        then("`minimize.elements.icon` is defined", () => {
+          expect(minimize["elements"].icon).toBeDefined();
+        });
+
+        when("`minimize.elements.icon` is defined", () => {
+          then(
+            "`minimize.elements.icon` is a cached reference to the `div` with class `icon`",
+            () => {
+              const icon = minimize.root.querySelector(
+                ".icon"
+              ) as HTMLDivElement;
+              expect(minimize["elements"].icon).toBe(icon);
+            }
+          );
+        });
+      });
+    });
+  });
+});
+
 // State
 
 // Operation
