@@ -1551,6 +1551,20 @@ gesture(Gesture.KEYDOWN, () => {
             expect(onminimize).toHaveBeenCalled();
           });
         });
+
+        when("user presses another key on `div` with class `icon`", () => {
+          let onminimize: jasmine.Spy;
+          beforeEach(() => {
+            onminimize = jasmine.createSpy("onminimize");
+            minimize.onminimize = onminimize;
+            const icon = minimize.root.querySelector(".icon") as HTMLElement;
+            icon.dispatchEvent(new KeyboardEvent(Gesture.KEYDOWN, { key: "a" }));
+          });
+
+          then("`onminimize` is not called", () => {
+            expect(onminimize).not.toHaveBeenCalled();
+          });
+        });
       });
     });
   });
