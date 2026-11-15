@@ -259,6 +259,11 @@ state(State.VISIBILITY, () => {
             then("`minimize.visibility` is `Visibility.HIDDEN`", () => {
               expect(minimize.visibility).toBe(Visibility.HIDDEN);
             });
+
+            then("minimize `visibility` attribute is `Visibility.HIDDEN`", () => {
+              const value = minimize.getAttribute(Attributes.VISIBILITY);
+              expect(value).toBe(Visibility.HIDDEN);
+            });
           });
 
           when("`minimize.visibility` is set to `null`", () => {
