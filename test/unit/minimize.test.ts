@@ -1209,6 +1209,12 @@ events(Event.ON_MINIMIZE, () => {
               then("`minimize.onminimize` is called", () => {
                 expect(onminimize).toHaveBeenCalled();
               });
+
+              then("`minimize.onminimize` is called with no detail", () => {
+                expect(onminimize).toHaveBeenCalledWith(
+                  jasmine.objectContaining({ detail: null })
+                );
+              });
             });
           });
         });
