@@ -614,15 +614,32 @@ state(State.APPEARANCE, () => {
           });
 
           when("`appearance` attribute is set to `invalid`", () => {
+            let error: Error;
             beforeEach(async () => {
-              await jasmine.spyOnGlobalErrorsAsync(async () => {
+              await jasmine.spyOnGlobalErrorsAsync(async (reported) => {
                 minimize.setAttribute(Attributes.APPEARANCE, "invalid");
+                error = reported.calls.mostRecent()?.args[0];
               });
             });
 
             then("`appearance` attribute does not exist", () => {
               expect(minimize.hasAttribute(Attributes.APPEARANCE)).toBeFalse();
             });
+
+            then("`minimize.appearance` is `Appearance.FLOATING`", () => {
+              expect(minimize.appearance).toBe(Appearance.FLOATING);
+            });
+
+            then("an error is reported", () => {
+              expect(error).toBeDefined();
+            });
+
+            then(
+              "error message contains 'Invalid appearance value: invalid'",
+              () => {
+                expect(error.message).toBe("Invalid appearance value: invalid");
+              }
+            );
           });
 
           and("`minimize.appearance` is set to `Appearance.FLAT`", () => {
