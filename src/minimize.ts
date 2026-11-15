@@ -239,10 +239,12 @@ export class Minimize extends Component implements Meta {
   };
 
   /**
-   * Request minimizing: changes no state
+   * Request minimizing: changes no state, every call dispatches `onminimize`
    * @category Operations
    */
-  public minimize = () => {};
+  public minimize = () => {
+    this._dispatch(Event.ON_MINIMIZE);
+  };
 
   /**
    * List operations to perform for selected attributes being observed in the DOM.
