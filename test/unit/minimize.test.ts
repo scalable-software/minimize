@@ -560,6 +560,22 @@ state(State.APPEARANCE, () => {
         then("`appearance` attribute does not exist", () => {
           expect(minimize.hasAttribute(Attributes.APPEARANCE)).toBeFalse();
         });
+
+        then("`minimize.appearance` setter exists", () => {
+          expect(hasSetter(minimize, "appearance")).toBeTrue();
+        });
+
+        and("`minimize.appearance` setter exists", () => {
+          when("`minimize.appearance` is set to `Appearance.FLAT`", () => {
+            beforeEach(() => {
+              minimize.appearance = Appearance.FLAT;
+            });
+
+            then("`minimize.appearance` is `Appearance.FLAT`", () => {
+              expect(minimize.appearance).toBe(Appearance.FLAT);
+            });
+          });
+        });
       });
     });
   });
