@@ -14,6 +14,10 @@ metadata(Metadata.TAG, () => {
     then("Tag is defined", () => {
       expect(Tag).toBeDefined();
     });
+
+    then("Tag is `minimize-button`", () => {
+      expect(Tag).toBe("minimize-button");
+    });
   });
 });
 
