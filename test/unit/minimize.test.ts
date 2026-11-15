@@ -1535,8 +1535,17 @@ gesture(Gesture.KEYDOWN, () => {
             );
           });
 
-          then("`onminimize` is called", () => {
-            expect(onminimize).toHaveBeenCalled();
+          then("`minimize.status` is `Status.PRESSED`", () => {
+            expect(minimize.status).toEqual(Status.PRESSED);
+          });
+
+          then("`status` attribute is `Status.PRESSED`", () => {
+            const value = minimize.getAttribute(Attributes.STATUS);
+            expect(value).toBe(Status.PRESSED);
+          });
+
+          then("`onminimize` is not called", () => {
+            expect(onminimize).not.toHaveBeenCalled();
           });
         });
 
