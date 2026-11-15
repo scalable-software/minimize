@@ -1049,6 +1049,31 @@ events(Event.ON_SHOW, () => {
                   });
                 }
               );
+
+              and("`minimize.onshow` is set to a new listener", () => {
+                let onshow2: jasmine.Spy;
+                beforeEach(() => {
+                  onshow2 = jasmine.createSpy("onshow2");
+                  minimize.onshow = onshow2;
+                });
+
+                when(
+                  "`minimize.visibility` is set to `Visibility.VISIBLE`",
+                  () => {
+                    beforeEach(() => {
+                      minimize.visibility = Visibility.VISIBLE;
+                    });
+
+                    then("old `minimize.onshow` is not called", () => {
+                      expect(onshow).not.toHaveBeenCalled();
+                    });
+
+                    then("new `minimize.onshow` is called", () => {
+                      expect(onshow2).toHaveBeenCalled();
+                    });
+                  }
+                );
+              });
             });
           });
         });
