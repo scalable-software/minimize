@@ -575,6 +575,29 @@ state(State.APPEARANCE, () => {
               expect(minimize.appearance).toBe(Appearance.FLAT);
             });
           });
+
+          when("`minimize.appearance` is set to `invalid`", () => {
+            let error: Error;
+            beforeEach(() => {
+              try {
+                // @ts-expect-error
+                minimize.appearance = "invalid";
+              } catch (err) {
+                error = err as Error;
+              }
+            });
+
+            then("an error is thrown", () => {
+              expect(error).toBeDefined();
+            });
+
+            then(
+              "error message contains 'Invalid appearance value: invalid'",
+              () => {
+                expect(error.message).toBe("Invalid appearance value: invalid");
+              }
+            );
+          });
         });
       });
     });
