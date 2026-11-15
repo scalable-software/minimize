@@ -96,6 +96,18 @@ composition(Composition.TEMPLATE, () => {
             const div = minimize.root.querySelector("div.icon");
             expect(div).not.toBeNull();
           });
+
+          when("`minimize.root` contains `div.icon`", () => {
+            let div: HTMLDivElement;
+            beforeEach(() => {
+              div = minimize.root.querySelector("div.icon") as HTMLDivElement;
+            });
+
+            then("`div.icon` contains `svg.minimize`", () => {
+              const svg = div.querySelector("svg.minimize");
+              expect(svg).not.toBeNull();
+            });
+          });
         });
       });
     });
