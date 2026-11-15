@@ -6,7 +6,8 @@ import {
   CSS,
   Attributes,
   State,
-  Visibility
+  Visibility,
+  Status
 } from "@scalable.software/minimize";
 
 // Configuration
@@ -377,6 +378,43 @@ state(State.VISIBILITY, () => {
                 expect(error.message).toBe("Invalid visibility value: invalid");
               }
             );
+          });
+        });
+      });
+    });
+  });
+});
+
+state(State.STATUS, () => {
+  given("Minimize is defined in custom element registry", () => {
+    beforeEach(() => {
+      define(Minimize.Tag, Minimize);
+    });
+
+    and("a HTML Template is added to DOM", () => {
+      beforeEach(async () => {
+        await Minimize.Template.load("minimize.template.html");
+      });
+      afterEach(() => {
+        remove(Minimize.Tag);
+      });
+
+      and("a new minimize is added to DOM", () => {
+        let minimize: Minimize;
+        beforeEach(() => {
+          minimize = add<Minimize>(Minimize.Tag);
+        });
+        afterEach(() => {
+          minimize.remove();
+        });
+
+        then("`minimize.status` getter exists", () => {
+          expect(minimize.status).toBeDefined();
+        });
+
+        when("`minimize.status` getter exists", () => {
+          then("`minimize.status` is `Status.RELEASED`", () => {
+            expect(minimize.status).toBe(Status.RELEASED);
           });
         });
       });
