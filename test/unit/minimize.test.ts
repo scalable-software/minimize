@@ -741,6 +741,10 @@ operation(Operation.HIDE, () => {
             then("`minimize.visibility` is `Visibility.HIDDEN`", () => {
               expect(minimize.visibility).toBe(Visibility.HIDDEN);
             });
+
+            then("`minimize.hide` returns nothing", () => {
+              expect(result).toBeUndefined();
+            });
           });
         });
       });
