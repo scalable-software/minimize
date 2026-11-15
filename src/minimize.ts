@@ -14,7 +14,8 @@ import {
   Visibility,
   Status,
   Appearance,
-  Event
+  Event,
+  Gesture
 } from "./minimize.meta.js";
 
 import { type Meta } from "./minimize.meta.js";
@@ -163,6 +164,10 @@ export class Minimize extends Component implements Meta {
   public get status(): Status {
     return this._status;
   }
+  private set status(status: Status) {
+    // Mutate
+    this._status = status;
+  }
 
   /**
    * Get and set the appearance of the minimize button
@@ -247,6 +252,15 @@ export class Minimize extends Component implements Meta {
   };
 
   /**
+   * Press the minimize button: reached only through a gesture
+   * @category Operations
+   * @hidden
+   */
+  private _press = () => {
+    this.status = Status.PRESSED;
+  };
+
+  /**
    * List operations to perform for selected attributes being observed in the DOM.
    * @category Configuration
    * @hidden
@@ -282,12 +296,29 @@ export class Minimize extends Component implements Meta {
    * @category Configuration
    * @hidden
    */
-  protected _addEventListeners = () => {};
+  protected _addEventListeners = () => {
+    this.elements.icon?.addEventListener(
+      Gesture.POINTERDOWN,
+      this._handleIconPointerdown
+    );
+  };
 
   /**
    * Called by the disconnectedCallback prototypical method
    * @category Configuration
    * @hidden
    */
-  protected _removeEventListeners = () => {};
+  protected _removeEventListeners = () => {
+    this.elements.icon?.removeEventListener(
+      Gesture.POINTERDOWN,
+      this._handleIconPointerdown
+    );
+  };
+
+  /**
+   * Handles the pointer going down on the icon: presses the minimize button
+   * @category Gesture
+   * @hidden
+   */
+  private _handleIconPointerdown = () => this._press();
 }
