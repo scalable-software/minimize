@@ -329,6 +329,10 @@ export class Minimize extends Component implements Meta {
       Gesture.KEYDOWN,
       this._handleIconKeydown
     );
+    this.elements.icon?.addEventListener(
+      Gesture.KEYUP,
+      this._handleIconKeyupMinimize
+    );
   };
 
   /**
@@ -356,6 +360,10 @@ export class Minimize extends Component implements Meta {
     this.elements.icon?.removeEventListener(
       Gesture.KEYDOWN,
       this._handleIconKeydown
+    );
+    this.elements.icon?.removeEventListener(
+      Gesture.KEYUP,
+      this._handleIconKeyupMinimize
     );
   };
 
@@ -398,4 +406,12 @@ export class Minimize extends Component implements Meta {
     event.preventDefault();
     this._press();
   };
+
+  /**
+   * Handles a key lifted from the icon: Enter requests minimizing
+   * @category Gesture
+   * @hidden
+   */
+  private _handleIconKeyupMinimize = (event: KeyboardEvent) =>
+    event.key === Key.ENTER && this.minimize();
 }
