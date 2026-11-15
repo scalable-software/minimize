@@ -1439,3 +1439,44 @@ gesture(Gesture.POINTERLEAVE, () => {
     });
   });
 });
+
+gesture(Gesture.CLICK, () => {
+  and("Minimize is defined in custom element registry", () => {
+    beforeEach(() => {
+      define(Minimize.Tag, Minimize);
+    });
+
+    and("HTML Template is added to DOM", () => {
+      beforeEach(async () => {
+        await Minimize.Template.load("minimize.template.html");
+      });
+      afterEach(() => {
+        remove(Minimize.Tag);
+      });
+
+      and("a new minimize is added to DOM", () => {
+        let minimize: Minimize;
+        beforeEach(() => {
+          minimize = add<Minimize>(Minimize.Tag);
+        });
+        afterEach(() => {
+          minimize.remove();
+        });
+
+        when("user `click` on `div` with class `icon`", () => {
+          let onminimize: jasmine.Spy;
+          beforeEach(() => {
+            onminimize = jasmine.createSpy("onminimize");
+            minimize.onminimize = onminimize;
+            const icon = minimize.root.querySelector(".icon") as HTMLElement;
+            icon.click();
+          });
+
+          then("`onminimize` is called", () => {
+            expect(onminimize).toHaveBeenCalled();
+          });
+        });
+      });
+    });
+  });
+});
