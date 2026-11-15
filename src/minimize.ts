@@ -142,6 +142,9 @@ export class Minimize extends Component implements Meta {
     return this._appearance;
   }
   public set appearance(appearance: Appearance) {
+    // Validate
+    appearance = Validate.appearance(appearance);
+
     // Mutate
     this._appearance = appearance;
   }
