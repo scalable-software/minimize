@@ -1590,15 +1590,28 @@ gesture(Gesture.KEYDOWN, () => {
 
         when("user presses another key on `div` with class `icon`", () => {
           let onminimize: jasmine.Spy;
+          let event: KeyboardEvent;
           beforeEach(() => {
             onminimize = jasmine.createSpy("onminimize");
             minimize.onminimize = onminimize;
             const icon = minimize.root.querySelector(".icon") as HTMLElement;
-            icon.dispatchEvent(new KeyboardEvent(Gesture.KEYDOWN, { key: "a" }));
+            event = new KeyboardEvent(Gesture.KEYDOWN, {
+              key: "a",
+              cancelable: true
+            });
+            icon.dispatchEvent(event);
           });
 
           then("`onminimize` is not called", () => {
             expect(onminimize).not.toHaveBeenCalled();
+          });
+
+          then("`minimize.status` is `Status.RELEASED`", () => {
+            expect(minimize.status).toEqual(Status.RELEASED);
+          });
+
+          then("the default action of the key is not prevented", () => {
+            expect(event.defaultPrevented).toBeFalse();
           });
         });
       });
