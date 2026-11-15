@@ -1476,6 +1476,21 @@ gesture(Gesture.CLICK, () => {
             expect(onminimize).toHaveBeenCalled();
           });
         });
+
+        when("user `click` on `div` with class `icon` twice", () => {
+          let onminimize: jasmine.Spy;
+          beforeEach(() => {
+            onminimize = jasmine.createSpy("onminimize");
+            minimize.onminimize = onminimize;
+            const icon = minimize.root.querySelector(".icon") as HTMLElement;
+            icon.click();
+            icon.click();
+          });
+
+          then("`onminimize` is called twice", () => {
+            expect(onminimize).toHaveBeenCalledTimes(2);
+          });
+        });
       });
     });
   });
