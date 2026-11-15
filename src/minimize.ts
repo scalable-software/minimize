@@ -165,8 +165,13 @@ export class Minimize extends Component implements Meta {
     return this._status;
   }
   private set status(status: Status) {
-    // Mutate
-    this._status = status;
+    try {
+      // Mutate
+      this._status = status;
+    } finally {
+      // Reflect
+      this._reflect(Attributes.STATUS, this._status);
+    }
   }
 
   /**
