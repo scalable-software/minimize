@@ -574,6 +574,11 @@ state(State.APPEARANCE, () => {
             then("`minimize.appearance` is `Appearance.FLAT`", () => {
               expect(minimize.appearance).toBe(Appearance.FLAT);
             });
+
+            then("minimize `appearance` attribute is `Appearance.FLAT`", () => {
+              const value = minimize.getAttribute(Attributes.APPEARANCE);
+              expect(value).toBe(Appearance.FLAT);
+            });
           });
 
           when("`minimize.appearance` is set to `null`", () => {
