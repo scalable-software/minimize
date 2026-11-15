@@ -111,6 +111,10 @@ composition(Composition.TEMPLATE, () => {
             then("`div.icon` has `tabindex` `0`", () => {
               expect(div.getAttribute("tabindex")).toBe("0");
             });
+
+            then("`div.icon` has `role` `button`", () => {
+              expect(div.getAttribute("role")).toBe("button");
+            });
           });
         });
       });
