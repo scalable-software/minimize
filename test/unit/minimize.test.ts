@@ -856,6 +856,17 @@ operation(Operation.MINIMIZE, () => {
                 expect(result).toBeUndefined();
               });
             });
+
+            when("invoking `minimize.minimize` twice", () => {
+              beforeEach(() => {
+                minimize.minimize();
+                minimize.minimize();
+              });
+
+              then("`minimize.onminimize` is called twice", () => {
+                expect(onminimize).toHaveBeenCalledTimes(2);
+              });
+            });
           });
         });
       });
