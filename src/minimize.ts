@@ -178,6 +178,12 @@ export class Minimize extends Component implements Meta {
   };
 
   /**
+   * Request minimizing: changes no state
+   * @category Operations
+   */
+  public minimize = () => {};
+
+  /**
    * List operations to perform for selected attributes being observed in the DOM.
    * @category Configuration
    * @hidden
