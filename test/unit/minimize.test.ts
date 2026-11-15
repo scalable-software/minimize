@@ -261,6 +261,16 @@ state(State.VISIBILITY, () => {
             });
           });
 
+          when("`minimize.visibility` is set to `null`", () => {
+            beforeEach(() => {
+              minimize.visibility = null;
+            });
+
+            then("`minimize.visibility` is `Visibility.VISIBLE`", () => {
+              expect(minimize.visibility).toBe(Visibility.VISIBLE);
+            });
+          });
+
           when("`minimize.visibility` is set to `invalid`", () => {
             let error: Error;
             beforeEach(() => {
