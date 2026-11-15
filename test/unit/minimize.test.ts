@@ -8,7 +8,8 @@ import {
   State,
   Visibility,
   Status,
-  Appearance
+  Appearance,
+  Operation
 } from "@scalable.software/minimize";
 
 // Configuration
@@ -703,6 +704,36 @@ state(State.APPEARANCE, () => {
 });
 
 // Operation
+operation(Operation.HIDE, () => {
+  and("Minimize is defined in custom element registry", () => {
+    beforeEach(() => {
+      define(Minimize.Tag, Minimize);
+    });
+
+    and("HTML Template is added to DOM", () => {
+      beforeEach(async () => {
+        await Minimize.Template.load("minimize.template.html");
+      });
+      afterEach(() => {
+        remove(Minimize.Tag);
+      });
+
+      and("a new minimize is added to DOM", () => {
+        let minimize: Minimize;
+        beforeEach(() => {
+          minimize = add<Minimize>(Minimize.Tag);
+        });
+        afterEach(() => {
+          minimize.remove();
+        });
+
+        then("`minimize.hide` method exists", () => {
+          expect(minimize.hide).toBeDefined();
+        });
+      });
+    });
+  });
+});
 
 // Event
 
