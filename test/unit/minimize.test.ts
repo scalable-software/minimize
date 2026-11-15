@@ -1332,3 +1332,53 @@ gesture(Gesture.POINTERDOWN, () => {
     });
   });
 });
+
+gesture(Gesture.POINTERUP, () => {
+  and("Minimize is defined in custom element registry", () => {
+    beforeEach(() => {
+      define(Minimize.Tag, Minimize);
+    });
+
+    and("HTML Template is added to DOM", () => {
+      beforeEach(async () => {
+        await Minimize.Template.load("minimize.template.html");
+      });
+      afterEach(() => {
+        remove(Minimize.Tag);
+      });
+
+      and("a new minimize is added to DOM", () => {
+        let minimize: Minimize;
+        beforeEach(() => {
+          minimize = add<Minimize>(Minimize.Tag);
+        });
+        afterEach(() => {
+          minimize.remove();
+        });
+
+        and("user presses the pointer on `div` with class `icon`", () => {
+          beforeEach(() => {
+            const icon = minimize.root.querySelector(".icon") as HTMLElement;
+            icon.dispatchEvent(new PointerEvent(Gesture.POINTERDOWN));
+          });
+
+          when("user lifts the pointer from `div` with class `icon`", () => {
+            beforeEach(() => {
+              const icon = minimize.root.querySelector(".icon") as HTMLElement;
+              icon.dispatchEvent(new PointerEvent(Gesture.POINTERUP));
+            });
+
+            then("`minimize.status` is `Status.RELEASED`", () => {
+              expect(minimize.status).toEqual(Status.RELEASED);
+            });
+
+            then("`status` attribute is `Status.RELEASED`", () => {
+              const value = minimize.getAttribute(Attributes.STATUS);
+              expect(value).toBe(Status.RELEASED);
+            });
+          });
+        });
+      });
+    });
+  });
+});
