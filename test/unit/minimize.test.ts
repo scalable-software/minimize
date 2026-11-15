@@ -882,6 +882,18 @@ events(Event.ON_HIDE, () => {
               then("`minimize.onhide` is called", () => {
                 expect(onhide).toHaveBeenCalled();
               });
+
+              then(
+                "`minimize.onhide` is called with `{ detail: { visibility: Visibility.HIDDEN } }`",
+                () => {
+                  const message = {
+                    detail: { visibility: Visibility.HIDDEN }
+                  };
+                  expect(onhide).toHaveBeenCalledWith(
+                    jasmine.objectContaining(message)
+                  );
+                }
+              );
             });
           });
         });
