@@ -579,6 +579,18 @@ state(State.APPEARANCE, () => {
               const value = minimize.getAttribute(Attributes.APPEARANCE);
               expect(value).toBe(Appearance.FLAT);
             });
+
+            when("`minimize.appearance` is set to `Appearance.FLOATING`", () => {
+              beforeEach(() => {
+                minimize.appearance = Appearance.FLOATING;
+              });
+
+              then("`appearance` attribute does not exist", () => {
+                expect(
+                  minimize.hasAttribute(Attributes.APPEARANCE)
+                ).toBeFalse();
+              });
+            });
           });
 
           when("`minimize.appearance` is set to `null`", () => {
