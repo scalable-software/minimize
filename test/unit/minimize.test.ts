@@ -865,6 +865,26 @@ events(Event.ON_HIDE, () => {
         then("`minimize.onhide` setter exists", () => {
           expect(hasSetter(minimize, Event.ON_HIDE)).toBeTrue();
         });
+
+        and("`minimize.onhide` setter exists", () => {
+          and("`minimize.onhide` is set to a listener", () => {
+            let onhide: jasmine.Spy;
+            beforeEach(() => {
+              onhide = jasmine.createSpy("onhide");
+              minimize.onhide = onhide;
+            });
+
+            when("`minimize.visibility` is set to `Visibility.HIDDEN`", () => {
+              beforeEach(() => {
+                minimize.visibility = Visibility.HIDDEN;
+              });
+
+              then("`minimize.onhide` is called", () => {
+                expect(onhide).toHaveBeenCalled();
+              });
+            });
+          });
+        });
       });
     });
   });
