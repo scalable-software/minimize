@@ -99,4 +99,9 @@ svg {
     border-color: var(--button-hover-border-color);
     box-shadow: var(--button-hover-shadow);
   }
+  :host([status="pressed"]) .icon:hover {
+    background-color: var(--button-pressed-hover-background-color);
+    border-color: var(--button-hover-border-color);
+    box-shadow: var(--button-hover-shadow);
+  }
 }
