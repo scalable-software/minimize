@@ -72,9 +72,11 @@
 </ul>
 </li>
 <li>
-<p><strong>Press the Tab key</strong> until the button has focus, then press <strong>Enter</strong> or the <strong>space bar</strong>.</p>
+<p><strong>Press the Tab key</strong> until the button has focus, then <strong>hold down Enter</strong> or the <strong>space bar</strong>.</p>
 <ul>
-<li>Each key press logs one <code>onminimize</code>.</li>
+<li>It looks pressed, <code>status</code> shows <code>pressed</code>, and the page does not scroll. No <code>onminimize</code> is logged while the key is held.</li>
+<li><strong>Lift the key</strong>: <code>status</code> returns to <code>released</code>, and one <code>onminimize</code> is logged.</li>
+<li>Hold the key down again and <strong>press Tab</strong> to move the focus away: <code>status</code> returns to <code>released</code>, and no <code>onminimize</code> is logged.</li>
 </ul>
 </li>
 <li>
@@ -119,7 +121,7 @@
 <h2 id="3-architectural-overview" class="tsd-anchor-link">3. Architectural Overview<a href="#3-architectural-overview" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
 <h3 id="31-composition" class="tsd-anchor-link">3.1 Composition<a href="#31-composition" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul>
-<li><strong>Template</strong> (<code>minimize.template.html</code>): Defines DOM structure — a <code>.icon</code> container, focusable and announced as a button, holding the SVG icon of a single horizontal line.</li>
+<li><strong>Template</strong> (<code>minimize.template.html</code>): Defines DOM structure — a <code>.icon</code> container, focusable and announced as a button named &quot;Minimize&quot;, holding the SVG icon of a single horizontal line.</li>
 <li><strong>Style</strong> (<code>minimize.style.css</code>): Encapsulates appearance, including the pressed look, hover effects, the flat appearance, and light/dark theme adaptation.</li>
 <li><strong>Class</strong> (<code>minimize.ts</code>): Extends the base component class to handle lifecycle hooks, Shadow DOM creation, attribute reflection, and event dispatch.</li>
 </ul>
@@ -141,7 +143,7 @@
 <li>Clones the HTML template into the Shadow Root.</li>
 <li>Inserts a <code>&lt;link&gt;</code> for scoped CSS.</li>
 <li>Initialises default state attributes.</li>
-<li>Sets up event listeners on the icon: the pointer going down, being lifted and leaving, a click, and a key press.</li>
+<li>Sets up event listeners on the icon: the pointer going down, being lifted and leaving, a click, a key going down and being lifted, and the loss of focus.</li>
 </ol>
 </li>
 <li>
@@ -168,7 +170,7 @@
 <li>
 <p><strong><code>status</code></strong> (<code>released</code> | <code>pressed</code>) — <strong>readonly</strong></p>
 <ul>
-<li>Whether the control is being pressed. It is <code>pressed</code> from the moment the pointer goes down on the icon until it is lifted or leaves the icon, and <code>released</code> at all other times.</li>
+<li>Whether the control is being pressed. It is <code>pressed</code> from the moment the pointer goes down on the icon until it is lifted or leaves the icon, and from the moment Enter or Space goes down on the focused icon until the key is lifted or the icon loses focus. It is <code>released</code> at all other times.</li>
 <li><strong>Compulsory attribute</strong>: always present in the DOM, reflecting the current state at all times, so a stylesheet can select on <code>[status=&quot;pressed&quot;]</code>.</li>
 <li>Only the component changes it. Assigning the property does not compile in TypeScript, and a <code>status</code> attribute that is set or removed from outside is put back to the current state without an error.</li>
 </ul>
@@ -305,8 +307,18 @@
 </tr>
 <tr>
 <td><code>keydown</code></td>
-<td>Enter or Space is pressed while the icon has focus</td>
-<td><code>minimize()</code></td>
+<td>Enter or Space goes down while the icon has focus</td>
+<td><code>status</code> becomes <code>pressed</code>, and the page does not scroll</td>
+</tr>
+<tr>
+<td><code>keyup</code></td>
+<td>Enter or Space is lifted while the icon has focus</td>
+<td><code>minimize()</code> when the control is pressed, then <code>status</code> becomes <code>released</code></td>
+</tr>
+<tr>
+<td><code>blur</code></td>
+<td>the icon loses focus</td>
+<td><code>status</code> becomes <code>released</code>, and no request is made</td>
 </tr>
 <tr>
 <td><code>hover</code></td>
@@ -379,7 +391,7 @@
 <h2 id="6-best-practices-extensibility" class="tsd-anchor-link">6. Best Practices &amp; Extensibility<a href="#6-best-practices-extensibility" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
 <ol>
 <li><strong>Requests, not actions</strong> — <code>onminimize</code> says that minimizing was asked for. The host application decides what that means and does it.</li>
-<li><strong>Accessibility</strong> — The icon can be reached with the Tab key, is announced as a button, and is operated with Enter or the space bar. It has no accessible name of its own yet; consider an <code>aria-label</code> for that.</li>
+<li><strong>Accessibility</strong> — The icon can be reached with the Tab key, is announced as a button named &quot;Minimize&quot; through its <code>aria-label</code>, and is operated with Enter or the space bar: it is pressed while the key is held, and the request is made when the key is lifted.</li>
 <li><strong>Testing</strong> — Simulate pointer presses, clicks and key presses to confirm correct state transitions and event dispatch.</li>
 <li><strong>Documentation</strong> — Provide real usage snippets (like the Quick Start above) for developer onboarding.</li>
 <li><strong>Publishing</strong> — Use semantic versioning to manage features and breaking changes; employ CI/CD for automated build, test, and publish.</li>
