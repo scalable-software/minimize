@@ -1644,3 +1644,55 @@ gesture(Gesture.KEYDOWN, () => {
     });
   });
 });
+
+gesture(Gesture.KEYUP, () => {
+  and("Minimize is defined in custom element registry", () => {
+    beforeEach(() => {
+      define(Minimize.Tag, Minimize);
+    });
+
+    and("HTML Template is added to DOM", () => {
+      beforeEach(async () => {
+        await Minimize.Template.load("minimize.template.html");
+      });
+      afterEach(() => {
+        remove(Minimize.Tag);
+      });
+
+      and("a new minimize is added to DOM", () => {
+        let minimize: Minimize;
+        beforeEach(() => {
+          minimize = add<Minimize>(Minimize.Tag);
+        });
+        afterEach(() => {
+          minimize.remove();
+        });
+
+        and("user presses `Key.ENTER` on `div` with class `icon`", () => {
+          beforeEach(() => {
+            const icon = minimize.root.querySelector(".icon") as HTMLElement;
+            icon.dispatchEvent(
+              new KeyboardEvent(Gesture.KEYDOWN, { key: Key.ENTER })
+            );
+          });
+
+          when("user lifts `Key.ENTER` from `div` with class `icon`", () => {
+            let onminimize: jasmine.Spy;
+            beforeEach(() => {
+              onminimize = jasmine.createSpy("onminimize");
+              minimize.onminimize = onminimize;
+              const icon = minimize.root.querySelector(".icon") as HTMLElement;
+              icon.dispatchEvent(
+                new KeyboardEvent(Gesture.KEYUP, { key: Key.ENTER })
+              );
+            });
+
+            then("`onminimize` is called once", () => {
+              expect(onminimize).toHaveBeenCalledTimes(1);
+            });
+          });
+        });
+      });
+    });
+  });
+});
