@@ -107,6 +107,10 @@ composition(Composition.TEMPLATE, () => {
               const svg = div.querySelector("svg.minimize");
               expect(svg).not.toBeNull();
             });
+
+            then("`div.icon` has `tabindex` `0`", () => {
+              expect(div.getAttribute("tabindex")).toBe("0");
+            });
           });
         });
       });
