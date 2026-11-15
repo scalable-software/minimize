@@ -1,6 +1,13 @@
 import { Template } from "@scalable.software/component";
 
-import { Minimize, Tag, CSS, Attributes } from "@scalable.software/minimize";
+import {
+  Minimize,
+  Tag,
+  CSS,
+  Attributes,
+  State,
+  Visibility
+} from "@scalable.software/minimize";
 
 // Configuration
 configuration(Configuration.TAG, () => {
@@ -202,6 +209,46 @@ composition(Composition.ELEMENT, () => {
 });
 
 // State
+state(State.VISIBILITY, () => {
+  given("Minimize is defined in custom element registry", () => {
+    beforeEach(() => {
+      define(Minimize.Tag, Minimize);
+    });
+
+    and("a HTML Template is added to DOM", () => {
+      beforeEach(async () => {
+        await Minimize.Template.load("minimize.template.html");
+      });
+      afterEach(() => {
+        remove(Minimize.Tag);
+      });
+
+      and("a new minimize is added to DOM", () => {
+        let minimize: Minimize;
+        beforeEach(() => {
+          minimize = add<Minimize>(Minimize.Tag);
+        });
+        afterEach(() => {
+          minimize.remove();
+        });
+
+        then("`minimize.visibility` getter exists", () => {
+          expect(minimize.visibility).toBeDefined();
+        });
+
+        when("`minimize.visibility` getter exists", () => {
+          then("`minimize.visibility` is `Visibility.VISIBLE`", () => {
+            expect(minimize.visibility).toBe(Visibility.VISIBLE);
+          });
+        });
+
+        then("`visibility` attribute does not exist", () => {
+          expect(minimize.hasAttribute(Attributes.VISIBILITY)).toBeFalse();
+        });
+      });
+    });
+  });
+});
 
 // Operation
 
