@@ -474,6 +474,25 @@ state(State.STATUS, () => {
               expect(error).toBeUndefined();
             });
           });
+
+          when("`status` attribute is removed", () => {
+            let error: Error | undefined;
+            beforeEach(async () => {
+              await jasmine.spyOnGlobalErrorsAsync(async (reported) => {
+                minimize.removeAttribute(Attributes.STATUS);
+                error = reported.calls.mostRecent()?.args[0];
+              });
+            });
+
+            then("`status` attribute is `Status.RELEASED`", () => {
+              const value = minimize.getAttribute(Attributes.STATUS);
+              expect(value).toBe(Status.RELEASED);
+            });
+
+            then("no error is reported", () => {
+              expect(error).toBeUndefined();
+            });
+          });
         });
       });
     });
