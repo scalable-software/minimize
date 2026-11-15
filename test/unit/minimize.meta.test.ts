@@ -5,7 +5,7 @@ import {
   Operation,
   Event,
   Gesture
-} from "@scalable.software/component.template";
+} from "@scalable.software/minimize";
 
 // Tag
 metadata(Metadata.TAG, () => {

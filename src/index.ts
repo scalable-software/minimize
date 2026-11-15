@@ -6,6 +6,6 @@ export {
   Operation,
   Event,
   Gesture
-} from "./component.meta.js";
+} from "./minimize.meta.js";
 
-export { component } from "./component.js";
+export { Minimize } from "./minimize.js";

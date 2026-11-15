@@ -1,5 +1,5 @@
-import { component } from "@scalable.software/component.template";
+import { Minimize } from "@scalable.software/minimize";
 
-await component.Template.load("component.template.html");
+await Minimize.Template.load("minimize.template.html");
 
-customElements.define(component.Tag, component);
+customElements.define(Minimize.Tag, Minimize);

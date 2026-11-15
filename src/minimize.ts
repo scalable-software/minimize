@@ -1,16 +1,16 @@
 /**
- * @module Component
+ * @module Minimize
  */
 
 // Base Component
 import { Component, Template } from "@scalable.software/component";
 import { type Configuration } from "@scalable.software/component";
 
-// Component Metadata
-import { Tag, CSS, Attributes } from "./component.meta.js";
+// Minimize Metadata
+import { Tag, CSS, Attributes } from "./minimize.meta.js";
 
 /**
- * Optional Configuration: required for components with custom layout and style
+ * Optional Configuration: required for minimize buttons with custom layout and style
  * @category Configuration
  */
 export const configuration: Configuration = {
@@ -24,11 +24,11 @@ export const configuration: Configuration = {
 } as const;
 
 /**
- * @category Component
+ * @category Minimize
  */
-export class component extends Component {
+export class Minimize extends Component {
   /**
-   * The tag name of the component
+   * The tag name of the minimize button
    * @category Configuration
    */
   public static get Tag() {
@@ -44,7 +44,7 @@ export class component extends Component {
   }
 
   /**
-   * Helper function to load the component template into DOM
+   * Helper function to load the minimize template into DOM
    * @category Utility
    */
   public static Template = new Template(import.meta.url);
@@ -78,7 +78,7 @@ export class component extends Component {
   protected _cache = () => {};
 
   /**
-   * Initialize component attributes with default values
+   * Initialize minimize attributes with default values
    * @category Configuration
    * @hidden
    */

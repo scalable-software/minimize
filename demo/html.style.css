@@ -27,7 +27,7 @@ body {
   }
 }
 
-pin-component {
+minimize-button {
   position: absolute;
   left: 48px;
   top: 48px;
