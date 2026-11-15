@@ -851,6 +851,10 @@ operation(Operation.MINIMIZE, () => {
               then("`minimize.onminimize` is called", () => {
                 expect(onminimize).toHaveBeenCalled();
               });
+
+              then("`minimize.minimize` returns nothing", () => {
+                expect(result).toBeUndefined();
+              });
             });
           });
         });
