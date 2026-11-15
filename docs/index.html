@@ -1,69 +1,461 @@
-<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>component.template</title><meta name="description" content="Documentation for component.template"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script defer src="assets/main.js"></script><script async src="assets/icons.js" id="tsd-icons-script"></script><script async src="assets/search.js" id="tsd-search-script"></script><script async src="assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="assets/icons.svg#icon-search"></use></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div><div class="field"><div id="tsd-toolbar-links"></div></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">component.template</a></div><div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget tsd-toolbar-icon menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="assets/icons.svg#icon-menu"></use></svg></a></div></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><h2>component.template</h2></div><div class="tsd-panel tsd-typography"><p><img src="https://flat.badgen.net/static/license/CC-BY-NC-SA-4.0/green" alt="License: CC BY-NC-SA 4.0"></p>
-<a id="md:component-template" class="tsd-anchor"></a><h1><a href="#md:component-template">Component Template</a></h1><p>This is a template for creating a new component. It includes a basic structure for the component, as well as a set of scripts for building, testing, and documenting the component.</p>
-<a id="md:getting-started" class="tsd-anchor"></a><h2><a href="#md:getting-started">Getting Started</a></h2><p>To create a new component, you can use this template as a starting point. To do so, click the &quot;Use this template&quot; button at the top of the repository page. This will create a new repository with the same structure as this one.</p>
-<p>Once you have created a new repository, you can clone it to your local machine and start working on your component.</p>
-<pre><code class="language-bash"><span class="hl-0">git</span><span class="hl-1"> </span><span class="hl-2">clone</span>
-</code><button>Copy</button></pre>
-<a id="md:install-dependencies" class="tsd-anchor"></a><h2><a href="#md:install-dependencies">Install Dependencies</a></h2><ol>
-<li>Before creating a new component, first install the dependencies:</li>
-</ol>
-<pre><code class="language-bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">install</span>
-</code><button>Copy</button></pre>
-<ol start="2">
-<li>Then run the <code>test</code> to ensure everything is in working order:</li>
-</ol>
-<pre><code class="language-bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">test</span>
-</code><button>Copy</button></pre>
-<blockquote>
-<p>note: a coverage and test report will be generated in the <code>coverage</code> directory and <code>report</code> directory, respectively.</p>
-</blockquote>
-<ol start="3">
-<li>Finally, run the <code>document</code> script to generate the component API documentation:</li>
-</ol>
-<pre><code class="language-bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">run</span><span class="hl-1"> </span><span class="hl-2">document</span>
-</code><button>Copy</button></pre>
-<blockquote>
-<p>note: The API documentation will be generated in the <code>docs</code> directory. You can review this by opening the <code>index.html</code> file in the <code>docs</code> directory in a web browser.</p>
-</blockquote>
-<a id="md:creating-a-new-component" class="tsd-anchor"></a><h2><a href="#md:creating-a-new-component">Creating a New Component</a></h2><p>To create a new component, you should first update the package metadata:</p>
-<a id="md:update-the-component-metadata" class="tsd-anchor"></a><h2><a href="#md:update-the-component-metadata">Update the Component Metadata</a></h2><p>Update the package name across all relevant files in this project:</p>
+<!DOCTYPE html><html class="default" lang="en" data-base="./"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>Minimize</title><meta name="description" content="Documentation for Minimize"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script defer src="assets/main.js"></script><script async src="assets/icons.js" id="tsd-icons-script"></script><script async src="assets/search.js" id="tsd-search-script"></script><script async src="assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar">
+<div class="tsd-toolbar-contents container"><a href="index.html" class="title">Minimize</a>
+<div id="tsd-toolbar-links"></div><button id="tsd-search-trigger" class="tsd-widget" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-search"></use></svg></button><dialog id="tsd-search" aria-label="Search"><input role="combobox" id="tsd-search-input" aria-controls="tsd-search-results" aria-autocomplete="list" aria-expanded="true" autocapitalize="off" autocomplete="off" placeholder="Search the docs" maxLength="100"/>
+<ul role="listbox" id="tsd-search-results"></ul>
+<div id="tsd-search-status" aria-live="polite" aria-atomic="true">
+<div>Preparing search index...</div></div></dialog><a href="#" class="tsd-widget menu" id="tsd-toolbar-menu-trigger" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-menu"></use></svg></a></div></header>
+<div class="container container-main">
+<div class="col-content">
+<div class="tsd-page-title">
+<h1>Minimize</h1></div>
+<div class="tsd-panel tsd-typography"><p><img src="https://flat.badgen.net/static/license/CC-BY-NC-SA-4.0/green" alt="License: CC BY-NC-SA 4.0"></p>
+<h1 id="minimize" class="tsd-anchor-link">Minimize<a href="#minimize" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h1>
+<p>A lightweight, self-contained web component that lets users ask for a window, panel or dialog to be minimized. It behaves like the matching control in the corner of a desktop window: it looks pressed while it is held, makes the request when it is let go, and makes none when the pointer moves away first. It can be shown or hidden on demand, operated with a pointer or the keyboard, and adapts automatically to light and dark themes, emitting an event for each request to give product teams a single drop-in control.</p>
+<p>The component does not minimize anything itself, and holds no window state: the host application acts on the request.</p>
+<hr>
+<h2 id="1-introduction" class="tsd-anchor-link">1. Introduction<a href="#1-introduction" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>The <strong>Minimize</strong> component provides a press button that requests minimizing and can be hidden or shown, via both <strong>imperative</strong> and <strong>declarative</strong> APIs. It leverages custom Web Component features, including Shadow DOM, custom events, and attribute reflection for a clean, modular design.</p>
+<h3 id="11-installation-setup" class="tsd-anchor-link">1.1 Installation &amp; Setup<a href="#11-installation-setup" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ol>
-<li><p>Package: <code>package.json</code> in the <code>root</code> directory.</p>
+<li>
+<p><strong>Clone the Repository</strong></p>
+<pre><code class="bash"><span class="hl-0">git</span><span class="hl-1"> </span><span class="hl-2">clone</span><span class="hl-1"> </span><span class="hl-2">https://github.com/scalable-software/minimize.git</span><br/><span class="hl-0">cd</span><span class="hl-1"> </span><span class="hl-2">minimize</span>
+</code><button type="button">Copy</button></pre>
+
 </li>
-<li><p>Typescript Config: both <code>tsconfig.json</code> files are in the <code>root</code> directory.</p>
+<li>
+<p><strong>Install Dependencies</strong></p>
+<pre><code class="bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">install</span>
+</code><button type="button">Copy</button></pre>
+
 </li>
-<li><p>ES Module: <code>importmap.js</code> files in the <code>importmap</code> directory.</p>
+<li>
+<p><strong>Run Tests (Optional)</strong></p>
+<pre><code class="bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">test</span>
+</code><button type="button">Copy</button></pre>
+
+<ul>
+<li>Ensures everything is working as expected before you start.</li>
+</ul>
 </li>
-<li><p>Unit Testing: The <code>wallaby.js</code> and <code>karma.conf.js</code> files are in the <code>root</code> directory.</p>
-</li>
-<li><p>Demo: The <code>index.js</code> file in the <code>demo</code> directory.</p>
-</li>
-<li><p>Confirm that the component name has been updated in all relevant files by running the <code>test</code> script:</p>
+<li>
+<p><strong>Start Local Server</strong></p>
+<pre><code class="bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">run</span><span class="hl-1"> </span><span class="hl-2">serve</span>
+</code><button type="button">Copy</button></pre>
+
+<ul>
+<li>This builds the component and opens the demo page, with <code>&lt;minimize-button&gt;</code> at the top and its controls below it.</li>
+</ul>
 </li>
 </ol>
-<pre><code class="language-bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">test</span>
-</code><button>Copy</button></pre>
-<a id="md:creating-a-new-component-1" class="tsd-anchor"></a><h2><a href="#md:creating-a-new-component-1">Creating a New Component</a></h2><p>To create a new component:</p>
+<hr>
+<h2 id="2-quick-start-usage-walkthrough" class="tsd-anchor-link">2. Quick Start Usage Walkthrough<a href="#2-quick-start-usage-walkthrough" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>This walkthrough uses the demo page to show how <code>&lt;minimize-button&gt;</code> behaves, before exploring its internal design. The page has the component in a band across the top, and three groups below it: <strong>States</strong>, <strong>Operations</strong> and <strong>Events</strong>.</p>
 <ol>
-<li>Review the directory and file structure of the fake <code>component</code> implementation.</li>
-<li>Study this software architecture implementation policies (available from repository owner).</li>
-<li>Define the component specifications using the <code>component.specifications.json</code> template file provided.</li>
-<li>Stickly follow a TDD development approach in feature branches.</li>
-<li>After complete implementation of a feature, <code>test</code>, <code>build</code>, and generate the <code>documentation</code> (see below)</li>
-<li>Update the demo scaffold in the <code>demo</code> directory to reflect the new component&#39;s API and functionality.</li>
-<li>Lastly do a pull request to the <code>main</code> branch and merge it if everything checks out.</li>
+<li>
+<p><strong>Press and hold</strong> the <code>&lt;minimize-button&gt;</code>.</p>
+<ul>
+<li>It looks pressed, and the <strong>States</strong> group shows <code>status</code> as <code>pressed</code>.</li>
+<li>Nothing appears in the <strong>Events</strong> log yet: no request has been made.</li>
+</ul>
+</li>
+<li>
+<p><strong>Let go</strong> while the pointer is still on the button.</p>
+<ul>
+<li><code>status</code> returns to <code>released</code>, and the <strong>Events</strong> log shows <code>onminimize</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Press</strong> again, <strong>move the pointer away</strong>, and then let go.</p>
+<ul>
+<li><code>status</code> returns to <code>released</code> the moment the pointer leaves, and no <code>onminimize</code> is logged: you changed your mind.</li>
+</ul>
+</li>
+<li>
+<p><strong>Press the Tab key</strong> until the button has focus, then press <strong>Enter</strong> or the <strong>space bar</strong>.</p>
+<ul>
+<li>Each key press logs one <code>onminimize</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Click</strong> the <code>minimize</code> button in the <strong>Operations</strong> group.</p>
+<ul>
+<li>The host application can make the same request from code. Every call logs one <code>onminimize</code>, and no state changes.</li>
+</ul>
+</li>
+<li>
+<p><strong>Click</strong> <code>hide</code>, then <code>show</code>.</p>
+<ul>
+<li>The component disappears and comes back. The log shows <code>onhide</code> and <code>onshow</code>, each with its <code>detail</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Choose</strong> <code>flat</code> for <code>appearance</code> in the <strong>States</strong> group.</p>
+<ul>
+<li>The button loses its border, shadow and rounded corners, as it would inside a taskbar.</li>
+</ul>
+</li>
+<li>
+<p><strong>Open the Developer Tools</strong>, select the <strong>Console</strong>, and subscribe from code:</p>
+<pre><code class="js"><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-4">minimize</span><span class="hl-1"> = </span><span class="hl-5">document</span><span class="hl-1">.</span><span class="hl-0">querySelector</span><span class="hl-1">(</span><span class="hl-2">&quot;minimize-button&quot;</span><span class="hl-1">);</span><br/><br/><span class="hl-5">minimize</span><span class="hl-1">.</span><span class="hl-0">onminimize</span><span class="hl-1"> = () </span><span class="hl-3">=&gt;</span><span class="hl-1"> </span><span class="hl-5">console</span><span class="hl-1">.</span><span class="hl-0">log</span><span class="hl-1">(</span><span class="hl-2">&quot;Minimizing was requested&quot;</span><span class="hl-1">);</span><br/><span class="hl-5">minimize</span><span class="hl-1">.</span><span class="hl-0">minimize</span><span class="hl-1">();</span>
+</code><button type="button">Copy</button></pre>
+
+</li>
+<li>
+<p><strong>Inspect</strong> the <code>&lt;minimize-button&gt;</code> in the <strong>Elements</strong> tab while you hold it down:</p>
+<pre><code class="html"><span class="hl-6">&lt;</span><span class="hl-7">minimize-button</span><span class="hl-1"> </span><span class="hl-8">status</span><span class="hl-1">=</span><span class="hl-9">&quot;pressed&quot;</span><span class="hl-6">&gt;&lt;/</span><span class="hl-7">minimize-button</span><span class="hl-6">&gt;</span>
+</code><button type="button">Copy</button></pre>
+
+</li>
+<li>
+<p><strong>Manually change</strong> the <code>status</code> attribute to <code>&quot;pressed&quot;</code>.</p>
+<ul>
+<li>The component puts <code>released</code> back at once: only the component changes <code>status</code>.</li>
+</ul>
+</li>
 </ol>
-<a id="md:testing-the-component" class="tsd-anchor"></a><h3><a href="#md:testing-the-component">Testing the Component</a></h3><p>To test the component, you can use the <code>test</code> script. This script will run the component&#39;s test suite and generate both a test and coverage report.</p>
-<pre><code class="language-bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">test</span>
-</code><button>Copy</button></pre>
-<a id="md:document-the-component-api" class="tsd-anchor"></a><h3><a href="#md:document-the-component-api">Document the Component API</a></h3><p>To document the component API, you can use the <code>docs</code> script. This script will generate a set of documentation files for the component.</p>
-<pre><code class="language-bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">run</span><span class="hl-1"> </span><span class="hl-2">document</span>
-</code><button>Copy</button></pre>
-<a id="md:license" class="tsd-anchor"></a><h2><a href="#md:license">License</a></h2><blockquote>
-<p>his software and its documentation are released under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public License (CC BY-NC-SA 4.0). This means you are free to share, copy, distribute, and transmit the work, and to adapt it, but only under the following conditions:</p>
+<p>For more details on <strong>States</strong>, <strong>Operations</strong>, and <strong>Events</strong>, consult the sections below or check the generated <strong>API documentation</strong> (see <code>npm run document</code>).</p>
+<hr>
+<h2 id="3-architectural-overview" class="tsd-anchor-link">3. Architectural Overview<a href="#3-architectural-overview" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<h3 id="31-composition" class="tsd-anchor-link">3.1 Composition<a href="#31-composition" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul>
+<li><strong>Template</strong> (<code>minimize.template.html</code>): Defines DOM structure — a <code>.icon</code> container, focusable and announced as a button, holding the SVG icon of a single horizontal line.</li>
+<li><strong>Style</strong> (<code>minimize.style.css</code>): Encapsulates appearance, including the pressed look, hover effects, the flat appearance, and light/dark theme adaptation.</li>
+<li><strong>Class</strong> (<code>minimize.ts</code>): Extends the base component class to handle lifecycle hooks, Shadow DOM creation, attribute reflection, and event dispatch.</li>
+</ul>
+<blockquote>
+<p><strong>Separation of Concerns</strong></p>
+<ul>
+<li><strong>HTML</strong> for structure</li>
+<li><strong>CSS</strong> for presentation</li>
+<li><strong>TypeScript</strong> for behavior</li>
+</ul>
+</blockquote>
+<h3 id="32-class-lifecycle" class="tsd-anchor-link">3.2 Class Lifecycle<a href="#32-class-lifecycle" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>Lifecycle methods are implemented in the base class and extended by the <strong>Minimize</strong> component:</p>
+<ul>
+<li>
+<p><strong><code>connectedCallback()</code></strong></p>
+<ol>
+<li>Creates a Shadow DOM.</li>
+<li>Clones the HTML template into the Shadow Root.</li>
+<li>Inserts a <code>&lt;link&gt;</code> for scoped CSS.</li>
+<li>Initialises default state attributes.</li>
+<li>Sets up event listeners on the icon: the pointer going down, being lifted and leaving, a click, and a key press.</li>
+</ol>
+</li>
+<li>
+<p><strong><code>disconnectedCallback()</code></strong></p>
+<ul>
+<li>Removes the event listeners.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="4-core-concepts-state-operations-events-and-gestures" class="tsd-anchor-link">4. Core Concepts: State, Operations, Events, and Gestures<a href="#4-core-concepts-state-operations-events-and-gestures" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>The following sections explain how the minimize button works internally.</p>
+<h3 id="41-state" class="tsd-anchor-link">4.1 State<a href="#41-state" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>The <strong>Minimize</strong> component uses both <strong>internal properties</strong> and <strong>DOM attributes</strong> to manage its state. This ensures consistency whether you modify the component via script or HTML attributes.</p>
+<h4 id="411-definition" class="tsd-anchor-link">4.1.1 Definition<a href="#411-definition" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4>
+<ul>
+<li>
+<p><strong><code>visibility</code></strong> (<code>visible</code> | <code>hidden</code>)</p>
+<ul>
+<li>Whether the minimize button is displayed.</li>
+<li><strong>Optional attribute</strong>: absent from the DOM when <code>visible</code> (the default); present as <code>[visibility=&quot;hidden&quot;]</code> on the host element when hidden.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>status</code></strong> (<code>released</code> | <code>pressed</code>) — <strong>readonly</strong></p>
+<ul>
+<li>Whether the control is being pressed. It is <code>pressed</code> from the moment the pointer goes down on the icon until it is lifted or leaves the icon, and <code>released</code> at all other times.</li>
+<li><strong>Compulsory attribute</strong>: always present in the DOM, reflecting the current state at all times, so a stylesheet can select on <code>[status=&quot;pressed&quot;]</code>.</li>
+<li>Only the component changes it. Assigning the property does not compile in TypeScript, and a <code>status</code> attribute that is set or removed from outside is put back to the current state without an error.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>appearance</code></strong> (<code>floating</code> | <code>flat</code>)</p>
+<ul>
+<li>Whether the minimize button stands alone, with its own border, shadow and rounded corners, or lies flat inside another surface such as a taskbar.</li>
+<li><strong>Optional attribute</strong>: absent from the DOM when <code>floating</code> (the default); present as <code>[appearance=&quot;flat&quot;]</code> on the host element when flat.</li>
+<li>It changes how the control looks, not what it does: it has no operation and sends no event.</li>
+</ul>
+</li>
+</ul>
+<h4 id="412-internal-vs-attribute-driven-state" class="tsd-anchor-link">4.1.2 Internal vs. Attribute-Driven State<a href="#412-internal-vs-attribute-driven-state" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4>
+<ol>
+<li>
+<p><strong>Internal State</strong></p>
+<pre><code class="typescript"><span class="hl-5">private</span><span class="hl-1"> </span><span class="hl-10">_visibility</span><span class="hl-1">: </span><span class="hl-5">Visibility</span><span class="hl-1"> = </span><span class="hl-5">Visibility</span><span class="hl-1">.</span><span class="hl-4">VISIBLE</span><span class="hl-1">;</span><br/><span class="hl-5">private</span><span class="hl-1"> </span><span class="hl-10">_status</span><span class="hl-1">: </span><span class="hl-5">Status</span><span class="hl-1"> = </span><span class="hl-5">Status</span><span class="hl-1">.</span><span class="hl-4">RELEASED</span><span class="hl-1">;</span><br/><span class="hl-5">private</span><span class="hl-1"> </span><span class="hl-10">_appearance</span><span class="hl-1">: </span><span class="hl-5">Appearance</span><span class="hl-1"> = </span><span class="hl-5">Appearance</span><span class="hl-1">.</span><span class="hl-4">FLOATING</span><span class="hl-1">;</span>
+</code><button type="button">Copy</button></pre>
+
+<ul>
+<li>Predictable defaults decoupled from external attributes.</li>
+</ul>
+</li>
+<li>
+<p><strong>Attribute-Driven State</strong></p>
+<pre><code class="typescript"><span class="hl-5">public</span><span class="hl-1"> </span><span class="hl-5">get</span><span class="hl-1"> </span><span class="hl-0">visibility</span><span class="hl-1">(): </span><span class="hl-5">Visibility</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-11">return</span><span class="hl-1"> </span><span class="hl-3">this</span><span class="hl-1">.</span><span class="hl-5">_visibility</span><span class="hl-1">;</span><br/><span class="hl-1">}</span><br/><span class="hl-5">public</span><span class="hl-1"> </span><span class="hl-5">set</span><span class="hl-1"> </span><span class="hl-0">visibility</span><span class="hl-1">(</span><span class="hl-5">visibility</span><span class="hl-1">: </span><span class="hl-5">Visibility</span><span class="hl-1"> | </span><span class="hl-3">null</span><span class="hl-1">) {</span><br/><span class="hl-1">  </span><span class="hl-11">try</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-12">// Normalize</span><br/><span class="hl-1">    </span><span class="hl-5">visibility</span><span class="hl-1"> = </span><span class="hl-5">visibility</span><span class="hl-1"> ?? </span><span class="hl-5">Visibility</span><span class="hl-1">.</span><span class="hl-4">VISIBLE</span><span class="hl-1">;</span><br/><span class="hl-1">    </span><span class="hl-12">// Validate</span><br/><span class="hl-1">    </span><span class="hl-5">visibility</span><span class="hl-1"> = </span><span class="hl-5">Validate</span><span class="hl-1">.</span><span class="hl-0">visibility</span><span class="hl-1">(</span><span class="hl-5">visibility</span><span class="hl-1">);</span><br/><span class="hl-1">    </span><span class="hl-12">// Guard</span><br/><span class="hl-1">    </span><span class="hl-11">if</span><span class="hl-1"> (</span><span class="hl-3">this</span><span class="hl-1">.</span><span class="hl-5">_visibility</span><span class="hl-1"> === </span><span class="hl-5">visibility</span><span class="hl-1">) </span><span class="hl-11">return</span><span class="hl-1">;</span><br/><span class="hl-1">    </span><span class="hl-12">// Mutate</span><br/><span class="hl-1">    </span><span class="hl-3">this</span><span class="hl-1">.</span><span class="hl-5">_visibility</span><span class="hl-1"> = </span><span class="hl-5">visibility</span><span class="hl-1">;</span><br/><span class="hl-1">  } </span><span class="hl-11">finally</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-12">// Reflect</span><br/><span class="hl-1">    </span><span class="hl-3">this</span><span class="hl-1">.</span><span class="hl-0">_reflect</span><span class="hl-1">(</span><br/><span class="hl-1">      </span><span class="hl-5">Attributes</span><span class="hl-1">.</span><span class="hl-4">VISIBILITY</span><span class="hl-1">,</span><br/><span class="hl-1">      </span><span class="hl-3">this</span><span class="hl-1">.</span><span class="hl-5">_visibility</span><span class="hl-1">,</span><br/><span class="hl-1">      </span><span class="hl-5">Visibility</span><span class="hl-1">.</span><span class="hl-4">VISIBLE</span><br/><span class="hl-1">    );</span><br/><span class="hl-1">  }</span><br/><span class="hl-1">  </span><span class="hl-12">// Dispatch</span><br/><span class="hl-1">  </span><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-4">detail</span><span class="hl-1"> = { </span><span class="hl-5">visibility</span><span class="hl-1"> };</span><br/><span class="hl-1">  </span><span class="hl-5">visibility</span><span class="hl-1"> === </span><span class="hl-5">Visibility</span><span class="hl-1">.</span><span class="hl-4">HIDDEN</span><span class="hl-1"> &amp;&amp; </span><span class="hl-3">this</span><span class="hl-1">.</span><span class="hl-0">_dispatch</span><span class="hl-1">(</span><span class="hl-5">Event</span><span class="hl-1">.</span><span class="hl-4">ON_HIDE</span><span class="hl-1">, </span><span class="hl-5">detail</span><span class="hl-1">);</span><br/><span class="hl-1">  </span><span class="hl-5">visibility</span><span class="hl-1"> === </span><span class="hl-5">Visibility</span><span class="hl-1">.</span><span class="hl-4">VISIBLE</span><span class="hl-1"> &amp;&amp; </span><span class="hl-3">this</span><span class="hl-1">.</span><span class="hl-0">_dispatch</span><span class="hl-1">(</span><span class="hl-5">Event</span><span class="hl-1">.</span><span class="hl-4">ON_SHOW</span><span class="hl-1">, </span><span class="hl-5">detail</span><span class="hl-1">);</span><br/><span class="hl-1">}</span>
+</code><button type="button">Copy</button></pre>
+
+<ul>
+<li>Normalises <code>null</code> to the default before validation.</li>
+<li>Validates the incoming value and throws on invalid input.</li>
+<li>Guards against no-op mutations with an early return.</li>
+<li>Always makes the <code>visibility</code> attribute show the state, also after a rejected or ignored value, so an invalid attribute never stays in the DOM.</li>
+<li>Dispatches the corresponding event on every accepted transition.</li>
+</ul>
+</li>
+<li>
+<p><strong>Readonly State</strong></p>
+<pre><code class="typescript"><span class="hl-5">public</span><span class="hl-1"> </span><span class="hl-5">get</span><span class="hl-1"> </span><span class="hl-0">status</span><span class="hl-1">(): </span><span class="hl-5">Status</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-11">return</span><span class="hl-1"> </span><span class="hl-3">this</span><span class="hl-1">.</span><span class="hl-5">_status</span><span class="hl-1">;</span><br/><span class="hl-1">}</span><br/><span class="hl-5">private</span><span class="hl-1"> </span><span class="hl-5">set</span><span class="hl-1"> </span><span class="hl-0">status</span><span class="hl-1">(</span><span class="hl-5">status</span><span class="hl-1">: </span><span class="hl-5">Status</span><span class="hl-1">) {</span><br/><span class="hl-1">  </span><span class="hl-11">try</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-12">// Mutate</span><br/><span class="hl-1">    </span><span class="hl-3">this</span><span class="hl-1">.</span><span class="hl-5">_status</span><span class="hl-1"> = </span><span class="hl-5">status</span><span class="hl-1">;</span><br/><span class="hl-1">  } </span><span class="hl-11">finally</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-12">// Reflect</span><br/><span class="hl-1">    </span><span class="hl-3">this</span><span class="hl-1">.</span><span class="hl-0">_reflect</span><span class="hl-1">(</span><span class="hl-5">Attributes</span><span class="hl-1">.</span><span class="hl-4">STATUS</span><span class="hl-1">, </span><span class="hl-3">this</span><span class="hl-1">.</span><span class="hl-5">_status</span><span class="hl-1">);</span><br/><span class="hl-1">  }</span><br/><span class="hl-1">}</span>
+</code><button type="button">Copy</button></pre>
+
+<ul>
+<li>The setter is private: the component produces the value itself, so it has no validator.</li>
+</ul>
+</li>
+</ol>
+<h4 id="413-lifecycle-attribute-handlers" class="tsd-anchor-link">4.1.3 Lifecycle &amp; Attribute Handlers<a href="#413-lifecycle-attribute-handlers" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4>
+<ul>
+<li><code>_initialize()</code> writes the <code>status</code> attribute to the DOM on connect, ensuring the compulsory attribute is always reflected from the first render.</li>
+<li><code>attributeChangedCallback()</code> invokes <code>_attributeHandlers</code>. For <code>visibility</code> and <code>appearance</code> the change is routed back through the setter, so external attribute mutations and imperative setter calls follow the same mutation path. For <code>status</code> the handler restores the attribute to the current state.</li>
+</ul>
+<h4 id="414-usage-tips" class="tsd-anchor-link">4.1.4 Usage Tips<a href="#414-usage-tips" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4>
+<ul>
+<li><strong>Fallback</strong>: Removing <code>[visibility=&quot;hidden&quot;]</code> reverts the component to its visible default.</li>
+<li><strong>Clean DOM</strong>: When <code>visibility</code> is <code>visible</code> and <code>appearance</code> is <code>floating</code>, neither attribute is present on the host element.</li>
+<li><strong>Hide what does not apply</strong>: the component does not decide when minimizing is allowed. Hide it when the window cannot be minimized, and show it again later.</li>
+</ul>
+<hr>
+<h3 id="42-operations" class="tsd-anchor-link">4.2 Operations<a href="#42-operations" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>The <strong>Minimize</strong> component's imperative API.</p>
+<h4 id="421-definition" class="tsd-anchor-link">4.2.1 Definition<a href="#421-definition" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4>
+<ol>
+<li><code>hide()</code> → sets <code>[visibility=&quot;hidden&quot;]</code> on the host element</li>
+<li><code>show()</code> → removes the <code>[visibility]</code> attribute from the host element</li>
+<li><code>minimize()</code> → requests minimizing: changes no state, and dispatches <code>onminimize</code> on every call</li>
+</ol>
+<h4 id="422-example" class="tsd-anchor-link">4.2.2 Example<a href="#422-example" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4>
+<pre><code class="typescript"><span class="hl-5">public</span><span class="hl-1"> </span><span class="hl-0">minimize</span><span class="hl-1"> = () </span><span class="hl-3">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-3">this</span><span class="hl-1">.</span><span class="hl-0">_dispatch</span><span class="hl-1">(</span><span class="hl-5">Event</span><span class="hl-1">.</span><span class="hl-4">ON_MINIMIZE</span><span class="hl-1">);</span><br/><span class="hl-1">};</span>
+</code><button type="button">Copy</button></pre>
+
+<p><code>hide()</code> and <code>show()</code> assign a state, and the state's setter sends the event. <code>minimize()</code> changes no state: the request is the outcome, so the operation sends the event itself, each time it is called.</p>
+<hr>
+<h3 id="43-events" class="tsd-anchor-link">4.3 Events<a href="#43-events" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>The <strong>Minimize</strong> component broadcasts custom events for each request and each change of visibility.</p>
+<h4 id="431-definition" class="tsd-anchor-link">4.3.1 Definition<a href="#431-definition" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4>
+<ul>
+<li><strong><code>onhide</code></strong>: Fired when transitioning from <code>visible</code> to <code>hidden</code>. Its <code>detail</code> is <code>{ visibility: &quot;hidden&quot; }</code>.</li>
+<li><strong><code>onshow</code></strong>: Fired when transitioning from <code>hidden</code> to <code>visible</code>. Its <code>detail</code> is <code>{ visibility: &quot;visible&quot; }</code>.</li>
+<li><strong><code>onminimize</code></strong>: Fired each time minimizing is requested, by a gesture or by the <code>minimize</code> operation. It has no <code>detail</code>.</li>
+</ul>
+<h4 id="432-usage-tips" class="tsd-anchor-link">4.3.2 Usage Tips<a href="#432-usage-tips" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4>
+<ul>
+<li>
+<p>Assign a handler directly to the setter:</p>
+<pre><code class="js"><span class="hl-5">minimize</span><span class="hl-1">.</span><span class="hl-0">onminimize</span><span class="hl-1"> = () </span><span class="hl-3">=&gt;</span><span class="hl-1"> </span><span class="hl-5">console</span><span class="hl-1">.</span><span class="hl-0">log</span><span class="hl-1">(</span><span class="hl-2">&quot;Minimizing was requested&quot;</span><span class="hl-1">);</span>
+</code><button type="button">Copy</button></pre>
+
+</li>
+<li>
+<p>Or use standard DOM event listening:</p>
+<pre><code class="js"><span class="hl-5">minimize</span><span class="hl-1">.</span><span class="hl-0">addEventListener</span><span class="hl-1">(</span><span class="hl-2">&quot;onminimize&quot;</span><span class="hl-1">, () </span><span class="hl-3">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-12">// ...</span><br/><span class="hl-1">});</span>
+</code><button type="button">Copy</button></pre>
+
+</li>
+<li>
+<p>Or receive every event the component sends with <code>onevent</code>:</p>
+<pre><code class="js"><span class="hl-5">minimize</span><span class="hl-1">.</span><span class="hl-0">onevent</span><span class="hl-1"> = (</span><span class="hl-5">event</span><span class="hl-1">) </span><span class="hl-3">=&gt;</span><span class="hl-1"> </span><span class="hl-5">console</span><span class="hl-1">.</span><span class="hl-0">log</span><span class="hl-1">(</span><span class="hl-5">event</span><span class="hl-1">.</span><span class="hl-5">type</span><span class="hl-1">, </span><span class="hl-5">event</span><span class="hl-1">.</span><span class="hl-5">detail</span><span class="hl-1">);</span>
+</code><button type="button">Copy</button></pre>
+
+</li>
+</ul>
+<hr>
+<h3 id="44-gestures" class="tsd-anchor-link">4.4 Gestures<a href="#44-gestures" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>What the end user does on the icon, and what it leads to.</p>
+<table>
+<thead>
+<tr>
+<th>Gesture</th>
+<th>On the icon</th>
+<th>Leads to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pointerdown</code></td>
+<td>the pointer goes down</td>
+<td><code>status</code> becomes <code>pressed</code></td>
+</tr>
+<tr>
+<td><code>pointerup</code></td>
+<td>the pointer is lifted</td>
+<td><code>status</code> becomes <code>released</code></td>
+</tr>
+<tr>
+<td><code>pointerleave</code></td>
+<td>the pointer leaves</td>
+<td><code>status</code> becomes <code>released</code>, and no request is made</td>
+</tr>
+<tr>
+<td><code>click</code></td>
+<td>the pointer is pressed and lifted on the icon</td>
+<td><code>minimize()</code></td>
+</tr>
+<tr>
+<td><code>keydown</code></td>
+<td>Enter or Space is pressed while the icon has focus</td>
+<td><code>minimize()</code></td>
+</tr>
+<tr>
+<td><code>hover</code></td>
+<td>the pointer is over the icon</td>
+<td>a change of background, border, shadow and fill, in CSS only</td>
+</tr>
+</tbody>
+</table>
+<p>Pressing and releasing are not offered to the outside: the component has no <code>press</code> or <code>release</code> operation.</p>
+<hr>
+<h2 id="5-development-workflow" class="tsd-anchor-link">5. Development Workflow<a href="#5-development-workflow" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>Below is a recommended workflow for building, testing, documenting, and publishing the Minimize component.</p>
+<h3 id="51-from-specifications-to-implementation" class="tsd-anchor-link">5.1 From Specifications to Implementation<a href="#51-from-specifications-to-implementation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ol>
+<li><strong>Define Specs</strong> (composition, states, operations, events, gestures) in <code>specifications/minimize.specifications.json</code>.</li>
+<li><strong>Implement</strong> in TypeScript, test first (reflect states as attributes, dispatch events on transitions and requests).</li>
+<li><strong>Link</strong> the final compiled JS or leverage import maps.</li>
+</ol>
+<h3 id="52-testing" class="tsd-anchor-link">5.2 Testing<a href="#52-testing" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>Unit tests run with Karma + Jasmine. The specification is checked first, then the suite covers composition, states, validation, operations, events, and gestures.</p>
+<pre><code class="bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">test</span>
+</code><button type="button">Copy</button></pre>
+
+<h3 id="53-documentation-typedoc" class="tsd-anchor-link">5.3 Documentation (Typedoc)<a href="#53-documentation-typedoc" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<pre><code class="bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">run</span><span class="hl-1"> </span><span class="hl-2">document</span>
+</code><button type="button">Copy</button></pre>
+
+<p>Auto-generates API docs from TypeScript annotations.</p>
+<h3 id="54-publishing-versioning" class="tsd-anchor-link">5.4 Publishing &amp; Versioning<a href="#54-publishing-versioning" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ol>
+<li>
+<p><strong>Build</strong>:</p>
+<pre><code class="bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">run</span><span class="hl-1"> </span><span class="hl-2">build</span>
+</code><button type="button">Copy</button></pre>
+
+<p>Outputs to <code>dist/</code>.</p>
+</li>
+<li>
+<p><strong>Bump Version</strong>:</p>
+<pre><code class="bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">version</span><span class="hl-1"> [major|</span><span class="hl-0">minor</span><span class="hl-1">|</span><span class="hl-0">patch]</span>
+</code><button type="button">Copy</button></pre>
+
+</li>
+<li>
+<p><strong>Publish</strong>:</p>
+<pre><code class="bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">publish</span>
+</code><button type="button">Copy</button></pre>
+
+</li>
+</ol>
+<h3 id="55-import-maps" class="tsd-anchor-link">5.5 Import Maps<a href="#55-import-maps" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>The path in the import map depends on how the package is consumed.</p>
+<p><strong>During local development</strong> (e.g. the project's own <code>demo/</code>), the path resolves relative to the served file and points directly into the local build output:</p>
+<pre><code class="html"><span class="hl-6">&lt;</span><span class="hl-7">script</span><span class="hl-13"> </span><span class="hl-8">type</span><span class="hl-13">=</span><span class="hl-9">&quot;importmap&quot;</span><span class="hl-6">&gt;</span><br/><span class="hl-13">  {</span><br/><span class="hl-13">    &quot;imports&quot;: {</span><br/><span class="hl-13">      &quot;@scalable.software/minimize&quot;: &quot;./dist/index.js&quot;</span><br/><span class="hl-13">    }</span><br/><span class="hl-13">  }</span><br/><span class="hl-6">&lt;/</span><span class="hl-7">script</span><span class="hl-6">&gt;</span><br/><span class="hl-6">&lt;</span><span class="hl-7">script</span><span class="hl-13"> </span><span class="hl-8">type</span><span class="hl-13">=</span><span class="hl-9">&quot;module&quot;</span><span class="hl-6">&gt;</span><br/><span class="hl-13">  </span><span class="hl-11">import</span><span class="hl-13"> </span><span class="hl-2">&quot;@scalable.software/minimize&quot;</span><span class="hl-13">;</span><br/><span class="hl-6">&lt;/</span><span class="hl-7">script</span><span class="hl-6">&gt;</span>
+</code><button type="button">Copy</button></pre>
+
+<p><strong>After publishing to npm</strong>, the path must point to the package inside <code>node_modules</code>:</p>
+<pre><code class="html"><span class="hl-6">&lt;</span><span class="hl-7">script</span><span class="hl-13"> </span><span class="hl-8">type</span><span class="hl-13">=</span><span class="hl-9">&quot;importmap&quot;</span><span class="hl-6">&gt;</span><br/><span class="hl-13">  {</span><br/><span class="hl-13">    &quot;imports&quot;: {</span><br/><span class="hl-13">      &quot;@scalable.software/minimize&quot;: &quot;/node_modules/@scalable.software/minimize/dist/index.js&quot;</span><br/><span class="hl-13">    }</span><br/><span class="hl-13">  }</span><br/><span class="hl-6">&lt;/</span><span class="hl-7">script</span><span class="hl-6">&gt;</span><br/><span class="hl-6">&lt;</span><span class="hl-7">script</span><span class="hl-13"> </span><span class="hl-8">type</span><span class="hl-13">=</span><span class="hl-9">&quot;module&quot;</span><span class="hl-6">&gt;</span><br/><span class="hl-13">  </span><span class="hl-11">import</span><span class="hl-13"> </span><span class="hl-2">&quot;@scalable.software/minimize&quot;</span><span class="hl-13">;</span><br/><span class="hl-6">&lt;/</span><span class="hl-7">script</span><span class="hl-6">&gt;</span>
+</code><button type="button">Copy</button></pre>
+
+<p>Alternatively, reference the package from a CDN:</p>
+<pre><code class="html"><span class="hl-6">&lt;</span><span class="hl-7">script</span><span class="hl-13"> </span><span class="hl-8">type</span><span class="hl-13">=</span><span class="hl-9">&quot;importmap&quot;</span><span class="hl-6">&gt;</span><br/><span class="hl-13">  {</span><br/><span class="hl-13">    &quot;imports&quot;: {</span><br/><span class="hl-13">      &quot;@scalable.software/minimize&quot;: &quot;https://unpkg.com/@scalable.software/minimize/dist/index.js&quot;</span><br/><span class="hl-13">    }</span><br/><span class="hl-13">  }</span><br/><span class="hl-6">&lt;/</span><span class="hl-7">script</span><span class="hl-6">&gt;</span><br/><span class="hl-6">&lt;</span><span class="hl-7">script</span><span class="hl-13"> </span><span class="hl-8">type</span><span class="hl-13">=</span><span class="hl-9">&quot;module&quot;</span><span class="hl-6">&gt;</span><br/><span class="hl-13">  </span><span class="hl-11">import</span><span class="hl-13"> </span><span class="hl-2">&quot;@scalable.software/minimize&quot;</span><span class="hl-13">;</span><br/><span class="hl-6">&lt;/</span><span class="hl-7">script</span><span class="hl-6">&gt;</span>
+</code><button type="button">Copy</button></pre>
+
+<p>The component is built on <code>@scalable.software/component</code>, which needs its own entry in the import map. Importing the package does not define the element: load the template and define it, as the demo does.</p>
+<pre><code class="js"><span class="hl-11">import</span><span class="hl-1"> { </span><span class="hl-5">Minimize</span><span class="hl-1"> } </span><span class="hl-11">from</span><span class="hl-1"> </span><span class="hl-2">&quot;@scalable.software/minimize&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-11">await</span><span class="hl-1"> </span><span class="hl-5">Minimize</span><span class="hl-1">.</span><span class="hl-5">Template</span><span class="hl-1">.</span><span class="hl-0">load</span><span class="hl-1">(</span><span class="hl-2">&quot;minimize.template.html&quot;</span><span class="hl-1">);</span><br/><br/><span class="hl-5">customElements</span><span class="hl-1">.</span><span class="hl-0">define</span><span class="hl-1">(</span><span class="hl-5">Minimize</span><span class="hl-1">.</span><span class="hl-5">Tag</span><span class="hl-1">, </span><span class="hl-5">Minimize</span><span class="hl-1">);</span>
+</code><button type="button">Copy</button></pre>
+
+<hr>
+<h2 id="6-best-practices-extensibility" class="tsd-anchor-link">6. Best Practices &amp; Extensibility<a href="#6-best-practices-extensibility" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<ol>
+<li><strong>Requests, not actions</strong> — <code>onminimize</code> says that minimizing was asked for. The host application decides what that means and does it.</li>
+<li><strong>Accessibility</strong> — The icon can be reached with the Tab key, is announced as a button, and is operated with Enter or the space bar. It has no accessible name of its own yet; consider an <code>aria-label</code> for that.</li>
+<li><strong>Testing</strong> — Simulate pointer presses, clicks and key presses to confirm correct state transitions and event dispatch.</li>
+<li><strong>Documentation</strong> — Provide real usage snippets (like the Quick Start above) for developer onboarding.</li>
+<li><strong>Publishing</strong> — Use semantic versioning to manage features and breaking changes; employ CI/CD for automated build, test, and publish.</li>
+</ol>
+<hr>
+<h2 id="7-conclusion" class="tsd-anchor-link">7. Conclusion<a href="#7-conclusion" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>By pressing, releasing and moving away from the control in the Usage Walkthrough, we have demonstrated its core features. Internally, the <strong>Minimize</strong> component's <strong>State</strong>, <strong>Operations</strong>, <strong>Events</strong> and <strong>Gestures</strong> ensure predictable, event-driven functionality. Follow the <strong>development workflow</strong> for build, test, docs, and publishing to confidently integrate <code>&lt;minimize-button&gt;</code> into your projects.</p>
+<hr>
+<h2 id="license" class="tsd-anchor-link">License<a href="#license" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<blockquote>
+<p>This software and its documentation are released under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public License (CC BY-NC-SA 4.0). This means you are free to share, copy, distribute, and transmit the work, and to adapt it, but only under the following conditions:</p>
 <p>Attribution: You must attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work).</p>
 <p>NonCommercial: You may not use this material for commercial purposes.</p>
 <p>ShareAlike: If you alter, transform, or build upon this work, you may distribute the resulting work only under the same or similar license to this one.</p>
 <p>For more details, please visit the full <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">license agreement</a>.</p>
 </blockquote>
-</div></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-index-accordion"><summary class="tsd-accordion-summary"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="assets/icons.svg#icon-chevronDown"></use></svg>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><h4 class="uppercase">Member Visibility</h4><form><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></form></div><div class="tsd-theme-toggle"><h4 class="uppercase">Theme</h4><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-index-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="assets/icons.svg#icon-chevronDown"></use></svg>On This Page</h3></summary><div class="tsd-accordion-details"><a href="#md:component-template"><span>Component <wbr/>Template</span></a><ul><li><a href="#md:getting-started"><span>Getting <wbr/>Started</span></a></li><li><a href="#md:install-dependencies"><span>Install <wbr/>Dependencies</span></a></li><li><a href="#md:creating-a-new-component"><span>Creating a <wbr/>New <wbr/>Component</span></a></li><li><a href="#md:update-the-component-metadata"><span>Update the <wbr/>Component <wbr/>Metadata</span></a></li><li><a href="#md:creating-a-new-component-1"><span>Creating a <wbr/>New <wbr/>Component</span></a></li><li><ul><li><a href="#md:testing-the-component"><span>Testing the <wbr/>Component</span></a></li><li><a href="#md:document-the-component-api"><span>Document the <wbr/>Component API</span></a></li></ul></li><li><a href="#md:license"><span>License</span></a></li></ul></div></details></div><div class="site-menu"><nav class="tsd-navigation"><a href="modules.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="assets/icons.svg#icon-1"></use></svg><span>component.template</span></a><ul class="tsd-small-nested-navigation" id="tsd-nav-container" data-base="."><li>Loading...</li></ul></nav></div></div></div><footer></footer><div class="overlay"></div></body></html>
+</div></div>
+<div class="col-sidebar">
+<div class="page-menu">
+<div class="tsd-navigation settings">
+<details class="tsd-accordion"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg>
+<h3>Settings</h3></summary>
+<div class="tsd-accordion-details">
+<div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span>
+<ul id="tsd-filter-options">
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></div>
+<div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div>
+<details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg>
+<h3>On This Page</h3></summary>
+<div class="tsd-accordion-details"><a href="#minimize"><span>Minimize</span></a>
+<ul>
+<li><a href="#1-introduction"><span>1. <wbr/>Introduction</span></a></li>
+<li>
+<ul>
+<li><a href="#11-installation-setup"><span>1.1 <wbr/>Installation &amp; <wbr/>Setup</span></a></li></ul></li>
+<li><a href="#2-quick-start-usage-walkthrough"><span>2. <wbr/>Quick <wbr/>Start <wbr/>Usage <wbr/>Walkthrough</span></a></li>
+<li><a href="#3-architectural-overview"><span>3. <wbr/>Architectural <wbr/>Overview</span></a></li>
+<li>
+<ul>
+<li><a href="#31-composition"><span>3.1 <wbr/>Composition</span></a></li>
+<li><a href="#32-class-lifecycle"><span>3.2 <wbr/>Class <wbr/>Lifecycle</span></a></li></ul></li>
+<li><a href="#4-core-concepts-state-operations-events-and-gestures"><span>4. <wbr/>Core <wbr/>Concepts: <wbr/>State, <wbr/>Operations, <wbr/>Events, and <wbr/>Gestures</span></a></li>
+<li>
+<ul>
+<li><a href="#41-state"><span>4.1 <wbr/>State</span></a></li>
+<li>
+<ul>
+<li><a href="#411-definition"><span>4.1.1 <wbr/>Definition</span></a></li>
+<li><a href="#412-internal-vs-attribute-driven-state"><span>4.1.2 <wbr/>Internal vs. <wbr/>Attribute-<wbr/>Driven <wbr/>State</span></a></li>
+<li><a href="#413-lifecycle-attribute-handlers"><span>4.1.3 <wbr/>Lifecycle &amp; <wbr/>Attribute <wbr/>Handlers</span></a></li>
+<li><a href="#414-usage-tips"><span>4.1.4 <wbr/>Usage <wbr/>Tips</span></a></li></ul></li>
+<li><a href="#42-operations"><span>4.2 <wbr/>Operations</span></a></li>
+<li>
+<ul>
+<li><a href="#421-definition"><span>4.2.1 <wbr/>Definition</span></a></li>
+<li><a href="#422-example"><span>4.2.2 <wbr/>Example</span></a></li></ul></li>
+<li><a href="#43-events"><span>4.3 <wbr/>Events</span></a></li>
+<li>
+<ul>
+<li><a href="#431-definition"><span>4.3.1 <wbr/>Definition</span></a></li>
+<li><a href="#432-usage-tips"><span>4.3.2 <wbr/>Usage <wbr/>Tips</span></a></li></ul></li>
+<li><a href="#44-gestures"><span>4.4 <wbr/>Gestures</span></a></li></ul></li>
+<li><a href="#5-development-workflow"><span>5. <wbr/>Development <wbr/>Workflow</span></a></li>
+<li>
+<ul>
+<li><a href="#51-from-specifications-to-implementation"><span>5.1 <wbr/>From <wbr/>Specifications to <wbr/>Implementation</span></a></li>
+<li><a href="#52-testing"><span>5.2 <wbr/>Testing</span></a></li>
+<li><a href="#53-documentation-typedoc"><span>5.3 <wbr/>Documentation (<wbr/>Typedoc)</span></a></li>
+<li><a href="#54-publishing-versioning"><span>5.4 <wbr/>Publishing &amp; <wbr/>Versioning</span></a></li>
+<li><a href="#55-import-maps"><span>5.5 <wbr/>Import <wbr/>Maps</span></a></li></ul></li>
+<li><a href="#6-best-practices-extensibility"><span>6. <wbr/>Best <wbr/>Practices &amp; <wbr/>Extensibility</span></a></li>
+<li><a href="#7-conclusion"><span>7. <wbr/>Conclusion</span></a></li>
+<li><a href="#license"><span>License</span></a></li></ul></div></details></div>
+<div class="site-menu">
+<nav class="tsd-navigation"><a href="modules.html">Minimize</a>
+<ul class="tsd-small-nested-navigation" id="tsd-nav-container">
+<li>Loading...</li></ul></nav></div></div></div><footer></footer>
+<div class="overlay"></div></body></html>
