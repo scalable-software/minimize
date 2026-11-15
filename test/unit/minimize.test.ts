@@ -576,6 +576,16 @@ state(State.APPEARANCE, () => {
             });
           });
 
+          when("`minimize.appearance` is set to `null`", () => {
+            beforeEach(() => {
+              minimize.appearance = null;
+            });
+
+            then("`minimize.appearance` is `Appearance.FLOATING`", () => {
+              expect(minimize.appearance).toBe(Appearance.FLOATING);
+            });
+          });
+
           when("`minimize.appearance` is set to `invalid`", () => {
             let error: Error;
             beforeEach(() => {
