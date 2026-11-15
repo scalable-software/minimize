@@ -495,6 +495,30 @@ state(State.STATUS, () => {
           });
         });
       });
+
+      and(
+        "a new minimize with `status` attribute `Status.PRESSED` is added to DOM",
+        () => {
+          let minimize: Minimize;
+          beforeEach(() => {
+            minimize = add<Minimize>(Minimize.Tag, {
+              [Attributes.STATUS]: Status.PRESSED
+            });
+          });
+          afterEach(() => {
+            minimize.remove();
+          });
+
+          then("`minimize.status` is `Status.RELEASED`", () => {
+            expect(minimize.status).toBe(Status.RELEASED);
+          });
+
+          then("`status` attribute is `Status.RELEASED`", () => {
+            const value = minimize.getAttribute(Attributes.STATUS);
+            expect(value).toBe(Status.RELEASED);
+          });
+        }
+      );
     });
   });
 });
