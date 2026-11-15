@@ -15,7 +15,8 @@ import {
   Status,
   Appearance,
   Event,
-  Gesture
+  Gesture,
+  Key
 } from "./minimize.meta.js";
 
 import { type Meta } from "./minimize.meta.js";
@@ -324,6 +325,10 @@ export class Minimize extends Component implements Meta {
       this._handleIconPointerleave
     );
     this.elements.icon?.addEventListener(Gesture.CLICK, this._handleIconClick);
+    this.elements.icon?.addEventListener(
+      Gesture.KEYDOWN,
+      this._handleIconKeydown
+    );
   };
 
   /**
@@ -347,6 +352,10 @@ export class Minimize extends Component implements Meta {
     this.elements.icon?.removeEventListener(
       Gesture.CLICK,
       this._handleIconClick
+    );
+    this.elements.icon?.removeEventListener(
+      Gesture.KEYDOWN,
+      this._handleIconKeydown
     );
   };
 
@@ -377,4 +386,12 @@ export class Minimize extends Component implements Meta {
    * @hidden
    */
   private _handleIconClick = () => this.minimize();
+
+  /**
+   * Handles a key pressed on the icon: Enter requests minimizing
+   * @category Gesture
+   * @hidden
+   */
+  private _handleIconKeydown = (event: KeyboardEvent) =>
+    event.key === Key.ENTER && this.minimize();
 }
