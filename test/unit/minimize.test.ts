@@ -422,6 +422,14 @@ state(State.STATUS, () => {
           });
         });
 
+        then("assigning `minimize.status` outside the minimize does not compile", () => {
+          const assign = () => {
+            // @ts-expect-error: the setter of `status` is private
+            minimize.status = Status.PRESSED;
+          };
+          expect(assign).toEqual(jasmine.any(Function));
+        });
+
         then("`status` attribute exists", () => {
           const value = minimize.getAttribute(Attributes.STATUS);
           expect(value).not.toBeNull();
