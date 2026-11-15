@@ -286,6 +286,37 @@ state(State.VISIBILITY, () => {
             });
           });
 
+          when("`visibility` attribute is set to `invalid`", () => {
+            beforeEach(async () => {
+              await jasmine.spyOnGlobalErrorsAsync(async () => {
+                minimize.setAttribute(Attributes.VISIBILITY, "invalid");
+              });
+            });
+
+            then("`visibility` attribute does not exist", () => {
+              expect(minimize.hasAttribute(Attributes.VISIBILITY)).toBeFalse();
+            });
+          });
+
+          and("`minimize.visibility` is set to `Visibility.HIDDEN`", () => {
+            beforeEach(() => {
+              minimize.visibility = Visibility.HIDDEN;
+            });
+
+            when("`visibility` attribute is set to `invalid`", () => {
+              beforeEach(async () => {
+                await jasmine.spyOnGlobalErrorsAsync(async () => {
+                  minimize.setAttribute(Attributes.VISIBILITY, "invalid");
+                });
+              });
+
+              then("`visibility` attribute is `Visibility.HIDDEN`", () => {
+                const value = minimize.getAttribute(Attributes.VISIBILITY);
+                expect(value).toBe(Visibility.HIDDEN);
+              });
+            });
+          });
+
           when("`minimize.visibility` is set to `invalid`", () => {
             let error: Error;
             beforeEach(() => {
