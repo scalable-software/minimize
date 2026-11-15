@@ -11,6 +11,9 @@ import { Tag, CSS, Attributes, Visibility } from "./minimize.meta.js";
 
 import { type Meta } from "./minimize.meta.js";
 
+// Validation
+import { Validate } from "./minimize.validation.js";
+
 /**
  * Optional Configuration: required for minimize buttons with custom layout and style
  * @category Configuration
@@ -81,6 +84,9 @@ export class Minimize extends Component implements Meta {
     return this._visibility;
   }
   public set visibility(visibility: Visibility) {
+    // Validate
+    visibility = Validate.visibility(visibility);
+
     // Mutate
     this._visibility = visibility;
   }
