@@ -1216,6 +1216,28 @@ events(Event.ON_MINIMIZE, () => {
                 );
               });
             });
+
+            and("`minimize.onminimize` is set to a new listener", () => {
+              let onminimize2: jasmine.Spy;
+              beforeEach(() => {
+                onminimize2 = jasmine.createSpy("onminimize2");
+                minimize.onminimize = onminimize2;
+              });
+
+              when("`minimize.minimize` is invoked", () => {
+                beforeEach(() => {
+                  minimize.minimize();
+                });
+
+                then("old `minimize.onminimize` is not called", () => {
+                  expect(onminimize).not.toHaveBeenCalled();
+                });
+
+                then("new `minimize.onminimize` is called", () => {
+                  expect(onminimize2).toHaveBeenCalled();
+                });
+              });
+            });
           });
         });
       });
