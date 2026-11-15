@@ -833,6 +833,27 @@ operation(Operation.MINIMIZE, () => {
         then("`minimize.minimize` method exists", () => {
           expect(minimize.minimize).toBeDefined();
         });
+
+        and("`minimize.minimize` method exists", () => {
+          and("`minimize.onminimize` is set to a listener", () => {
+            let onminimize: jasmine.Spy;
+            beforeEach(() => {
+              onminimize = jasmine.createSpy("onminimize");
+              minimize.onminimize = onminimize;
+            });
+
+            when("invoking `minimize.minimize`", () => {
+              let result: unknown;
+              beforeEach(() => {
+                result = minimize.minimize();
+              });
+
+              then("`minimize.onminimize` is called", () => {
+                expect(onminimize).toHaveBeenCalled();
+              });
+            });
+          });
+        });
       });
     });
   });
@@ -1143,6 +1164,26 @@ events(Event.ON_MINIMIZE, () => {
 
         then("`minimize.onminimize` setter exists", () => {
           expect(hasSetter(minimize, Event.ON_MINIMIZE)).toBeTrue();
+        });
+
+        and("`minimize.onminimize` setter exists", () => {
+          and("`minimize.onminimize` is set to a listener", () => {
+            let onminimize: jasmine.Spy;
+            beforeEach(() => {
+              onminimize = jasmine.createSpy("onminimize");
+              minimize.onminimize = onminimize;
+            });
+
+            when("`minimize.minimize` is invoked", () => {
+              beforeEach(() => {
+                minimize.minimize();
+              });
+
+              then("`minimize.onminimize` is called", () => {
+                expect(onminimize).toHaveBeenCalled();
+              });
+            });
+          });
         });
       });
     });
