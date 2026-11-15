@@ -1829,6 +1829,34 @@ gesture(Gesture.KEYUP, () => {
             });
           });
         });
+
+        and("user presses `Key.ENTER` on `div` with class `icon`", () => {
+          beforeEach(() => {
+            const icon = minimize.root.querySelector(".icon") as HTMLElement;
+            icon.dispatchEvent(
+              new KeyboardEvent(Gesture.KEYDOWN, { key: Key.ENTER })
+            );
+          });
+
+          when("user lifts `Key.ENTER` from `div` with class `icon` twice", () => {
+            let onminimize: jasmine.Spy;
+            beforeEach(() => {
+              onminimize = jasmine.createSpy("onminimize");
+              minimize.onminimize = onminimize;
+              const icon = minimize.root.querySelector(".icon") as HTMLElement;
+              icon.dispatchEvent(
+                new KeyboardEvent(Gesture.KEYUP, { key: Key.ENTER })
+              );
+              icon.dispatchEvent(
+                new KeyboardEvent(Gesture.KEYUP, { key: Key.ENTER })
+              );
+            });
+
+            then("`onminimize` is called once", () => {
+              expect(onminimize).toHaveBeenCalledTimes(1);
+            });
+          });
+        });
       });
     });
   });
