@@ -1238,6 +1238,41 @@ events(Event.ON_MINIMIZE, () => {
                 });
               });
             });
+
+            when("`minimize.onminimize` is set to `invalid`", () => {
+              let error: Error;
+              beforeEach(() => {
+                try {
+                  // @ts-expect-error
+                  minimize.onminimize = "invalid";
+                } catch (err) {
+                  error = err as Error;
+                }
+              });
+
+              then("an error is thrown", () => {
+                expect(error).toBeDefined();
+              });
+
+              then(
+                "error message contains 'Invalid onminimize value: invalid'",
+                () => {
+                  expect(error.message).toBe(
+                    "Invalid onminimize value: invalid"
+                  );
+                }
+              );
+
+              when("`minimize.minimize` is invoked", () => {
+                beforeEach(() => {
+                  minimize.minimize();
+                });
+
+                then("`minimize.onminimize` is still called", () => {
+                  expect(onminimize).toHaveBeenCalled();
+                });
+              });
+            });
           });
         });
       });
