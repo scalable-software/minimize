@@ -1535,6 +1535,22 @@ gesture(Gesture.KEYDOWN, () => {
             expect(onminimize).toHaveBeenCalled();
           });
         });
+
+        when("user presses `Key.SPACE` on `div` with class `icon`", () => {
+          let onminimize: jasmine.Spy;
+          beforeEach(() => {
+            onminimize = jasmine.createSpy("onminimize");
+            minimize.onminimize = onminimize;
+            const icon = minimize.root.querySelector(".icon") as HTMLElement;
+            icon.dispatchEvent(
+              new KeyboardEvent(Gesture.KEYDOWN, { key: Key.SPACE })
+            );
+          });
+
+          then("`onminimize` is called", () => {
+            expect(onminimize).toHaveBeenCalled();
+          });
+        });
       });
     });
   });
