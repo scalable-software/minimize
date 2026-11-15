@@ -1,0 +1,171 @@
+{
+  "Component": "Minimize",
+  "Package": "minimize",
+  "Description": "A theme-aware web component that lets users ask for a window to be minimized, and can be shown or hidden, while emitting an event for each request.",
+  "Tag": "minimize-button",
+  "Composition": {
+    "template": {
+      "description": "The HTML template for the minimize component.",
+      "type": "template",
+      "id": "minimize-button",
+      "contains": ["div.icon"]
+    },
+    "div.icon": {
+      "description": "The main container of the minimize component.",
+      "type": "div",
+      "cached": true,
+      "class": "icon",
+      "attributes": {
+        "tabindex": "0",
+        "role": "button"
+      },
+      "contains": ["svg.minimize"]
+    },
+    "svg.minimize": {
+      "description": "The SVG icon of a single horizontal line.",
+      "type": "svg",
+      "class": "minimize"
+    }
+  },
+  "States": {
+    "visibility": {
+      "type": "Visibility",
+      "description": "Indicates whether the component is visible or hidden.",
+      "values": ["visible", "hidden"],
+      "default": "visible",
+      "readonly": false,
+      "attribute": {
+        "optional": true
+      }
+    },
+    "status": {
+      "type": "Status",
+      "description": "Indicates whether the control is being pressed. It is 'pressed' from the moment the pointer goes down on the icon until it is lifted or leaves the icon, and 'released' at all other times. Only the component changes it.",
+      "values": ["released", "pressed"],
+      "default": "released",
+      "readonly": true,
+      "attribute": {
+        "optional": false
+      }
+    },
+    "appearance": {
+      "type": "Appearance",
+      "description": "Indicates whether the component stands alone, with its own border and shadow, or lies flat inside another surface.",
+      "values": ["floating", "flat"],
+      "default": "floating",
+      "readonly": false,
+      "attribute": {
+        "optional": true
+      }
+    }
+  },
+  "Operations": {
+    "hide": {
+      "description": "Sets 'visibility' state to 'hidden' and hides the minimize control.",
+      "parameters": [],
+      "returns": "void"
+    },
+    "show": {
+      "description": "Sets 'visibility' state to 'visible' and shows the minimize control.",
+      "parameters": [],
+      "returns": "void"
+    },
+    "minimize": {
+      "description": "Requests minimizing. Changes no state: every call dispatches 'onminimize'.",
+      "parameters": [],
+      "returns": "void"
+    }
+  },
+  "Events": {
+    "onhide": {
+      "description": "Dispatched when minimize 'visibility' state changes from 'visible' to 'hidden'.",
+      "parameters": [
+        {
+          "name": "detail",
+          "type": "object",
+          "description": "Contains the new visibility state of the component.",
+          "properties": {
+            "visibility": {
+              "type": "Visibility",
+              "values": ["hidden"]
+            }
+          }
+        }
+      ]
+    },
+    "onshow": {
+      "description": "Dispatched when minimize 'visibility' state changes from 'hidden' to 'visible'.",
+      "parameters": [
+        {
+          "name": "detail",
+          "type": "object",
+          "description": "Contains the new visibility state of the component.",
+          "properties": {
+            "visibility": {
+              "type": "Visibility",
+              "values": ["visible"]
+            }
+          }
+        }
+      ]
+    },
+    "onminimize": {
+      "description": "Dispatched each time minimizing is requested, by a gesture or by the 'minimize' operation."
+    }
+  },
+  "Gestures": {
+    "pointerdown": {
+      "description": "User presses the icon: the control becomes pressed.",
+      "triggers": [
+        {
+          "target": "div.icon",
+          "operation": "_press"
+        }
+      ]
+    },
+    "pointerup": {
+      "description": "User lifts the pointer from the icon: the control becomes released.",
+      "triggers": [
+        {
+          "target": "div.icon",
+          "operation": "_release"
+        }
+      ]
+    },
+    "pointerleave": {
+      "description": "The pointer leaves the icon while it is pressed: the control becomes released, and no request is made.",
+      "triggers": [
+        {
+          "target": "div.icon",
+          "operation": "_release"
+        }
+      ]
+    },
+    "click": {
+      "description": "User presses and lifts on the icon to request minimizing.",
+      "triggers": [
+        {
+          "target": "div.icon",
+          "operation": "minimize"
+        }
+      ]
+    },
+    "keydown": {
+      "description": "User presses Enter or Space on the focused icon to request minimizing.",
+      "triggers": [
+        {
+          "target": "div.icon",
+          "condition": "key is Enter or Space",
+          "operation": "minimize"
+        }
+      ]
+    },
+    "hover": {
+      "description": "Changes the button appearance when hovered.",
+      "effects": {
+        "properties": ["background-color", "border-color", "box-shadow", "fill"],
+        "target": "div.icon"
+      }
+    }
+  }
+}
