@@ -895,6 +895,20 @@ events(Event.ON_HIDE, () => {
                 }
               );
             });
+
+            when(
+              "`minimize.visibility` is set to `Visibility.HIDDEN` twice",
+              () => {
+                beforeEach(() => {
+                  minimize.visibility = Visibility.HIDDEN;
+                  minimize.visibility = Visibility.HIDDEN;
+                });
+
+                then("`minimize.onhide` is called once", () => {
+                  expect(onhide).toHaveBeenCalledTimes(1);
+                });
+              }
+            );
           });
         });
       });
