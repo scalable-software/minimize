@@ -931,6 +931,39 @@ events(Event.ON_HIDE, () => {
                 });
               });
             });
+
+            when("`minimize.onhide` is set to `invalid`", () => {
+              let error: Error;
+              beforeEach(() => {
+                try {
+                  // @ts-expect-error
+                  minimize.onhide = "invalid";
+                } catch (err) {
+                  error = err as Error;
+                }
+              });
+
+              then("an error is thrown", () => {
+                expect(error).toBeDefined();
+              });
+
+              then(
+                "error message contains 'Invalid onhide value: invalid'",
+                () => {
+                  expect(error.message).toBe("Invalid onhide value: invalid");
+                }
+              );
+
+              when("`minimize.visibility` is set to `Visibility.HIDDEN`", () => {
+                beforeEach(() => {
+                  minimize.visibility = Visibility.HIDDEN;
+                });
+
+                then("`minimize.onhide` is still called", () => {
+                  expect(onhide).toHaveBeenCalled();
+                });
+              });
+            });
           });
         });
       });
