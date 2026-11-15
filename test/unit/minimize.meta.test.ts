@@ -77,6 +77,13 @@ metadata(Metadata.STATE, () => {
       });
 
       when("State is an object", () => {
+        then("no state name is taken by the platform", () => {
+          const taken = Object.values(State).filter(
+            (name) => name in HTMLElement.prototype
+          );
+          expect(taken).toEqual([]);
+        });
+
         then("`State.VISIBILITY` exists", () => {
           expect(State.VISIBILITY).toBeDefined();
         });
