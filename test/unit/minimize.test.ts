@@ -428,6 +428,29 @@ state(State.STATUS, () => {
             const value = minimize.getAttribute(Attributes.STATUS);
             expect(value).toBe(Status.RELEASED);
           });
+
+          when("`status` attribute is set to `Status.PRESSED`", () => {
+            let error: Error | undefined;
+            beforeEach(async () => {
+              await jasmine.spyOnGlobalErrorsAsync(async (reported) => {
+                minimize.setAttribute(Attributes.STATUS, Status.PRESSED);
+                error = reported.calls.mostRecent()?.args[0];
+              });
+            });
+
+            then("`status` attribute is `Status.RELEASED`", () => {
+              const value = minimize.getAttribute(Attributes.STATUS);
+              expect(value).toBe(Status.RELEASED);
+            });
+
+            then("`minimize.status` is `Status.RELEASED`", () => {
+              expect(minimize.status).toBe(Status.RELEASED);
+            });
+
+            then("no error is reported", () => {
+              expect(error).toBeUndefined();
+            });
+          });
         });
       });
     });
