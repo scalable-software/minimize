@@ -7,7 +7,8 @@ import {
   Attributes,
   State,
   Visibility,
-  Status
+  Status,
+  Appearance
 } from "@scalable.software/minimize";
 
 // Configuration
@@ -519,6 +520,47 @@ state(State.STATUS, () => {
           });
         }
       );
+    });
+  });
+});
+
+state(State.APPEARANCE, () => {
+  given("Minimize is defined in custom element registry", () => {
+    beforeEach(() => {
+      define(Minimize.Tag, Minimize);
+    });
+
+    and("a HTML Template is added to DOM", () => {
+      beforeEach(async () => {
+        await Minimize.Template.load("minimize.template.html");
+      });
+      afterEach(() => {
+        remove(Minimize.Tag);
+      });
+
+      and("a new minimize is added to DOM", () => {
+        let minimize: Minimize;
+        beforeEach(() => {
+          minimize = add<Minimize>(Minimize.Tag);
+        });
+        afterEach(() => {
+          minimize.remove();
+        });
+
+        then("`minimize.appearance` getter exists", () => {
+          expect(minimize.appearance).toBeDefined();
+        });
+
+        when("`minimize.appearance` getter exists", () => {
+          then("`minimize.appearance` is `Appearance.FLOATING`", () => {
+            expect(minimize.appearance).toBe(Appearance.FLOATING);
+          });
+        });
+
+        then("`appearance` attribute does not exist", () => {
+          expect(minimize.hasAttribute(Attributes.APPEARANCE)).toBeFalse();
+        });
+      });
     });
   });
 });
