@@ -12,7 +12,8 @@ import {
   CSS,
   Attributes,
   Visibility,
-  Status
+  Status,
+  Appearance
 } from "./minimize.meta.js";
 
 import { type Meta } from "./minimize.meta.js";
@@ -77,6 +78,14 @@ export class Minimize extends Component implements Meta {
   private _status: Status = Status.RELEASED;
 
   /**
+   * Internal Appearance state of the component
+   * @category State
+   * @default Appearance.FLOATING
+   * @hidden
+   */
+  private _appearance: Appearance = Appearance.FLOATING;
+
+  /**
    * Cache element references to improve performance
    * @category State
    * @hidden
@@ -123,6 +132,14 @@ export class Minimize extends Component implements Meta {
    */
   public get status(): Status {
     return this._status;
+  }
+
+  /**
+   * Get the appearance of the minimize button
+   * @category State
+   */
+  public get appearance(): Appearance {
+    return this._appearance;
   }
 
   /**
