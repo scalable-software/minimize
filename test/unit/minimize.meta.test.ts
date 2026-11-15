@@ -269,6 +269,13 @@ metadata(Metadata.EVENT, () => {
       });
 
       when("Event is an object", () => {
+        then("no event name is taken by the platform", () => {
+          const taken = Object.values(Event).filter(
+            (name) => name in HTMLElement.prototype
+          );
+          expect(taken).toEqual([]);
+        });
+
         then("`Event.ON_HIDE` exists", () => {
           expect(Event.ON_HIDE).toBeDefined();
         });
