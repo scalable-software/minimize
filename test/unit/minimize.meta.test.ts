@@ -236,6 +236,14 @@ metadata(Metadata.OPERATION, () => {
         then("`Operation.SHOW` is `show`", () => {
           expect(Operation.SHOW).toBe("show");
         });
+
+        then("`Operation.MINIMIZE` exists", () => {
+          expect(Operation.MINIMIZE).toBeDefined();
+        });
+
+        then("`Operation.MINIMIZE` is `minimize`", () => {
+          expect(Operation.MINIMIZE).toBe("minimize");
+        });
       });
     });
   });
