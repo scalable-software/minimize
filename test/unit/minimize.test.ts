@@ -10,7 +10,8 @@ import {
   Status,
   Appearance,
   Operation,
-  Event
+  Event,
+  Gesture
 } from "@scalable.software/minimize";
 
 // Configuration
@@ -1281,3 +1282,40 @@ events(Event.ON_MINIMIZE, () => {
 });
 
 // Gesture
+gesture(Gesture.POINTERDOWN, () => {
+  and("Minimize is defined in custom element registry", () => {
+    beforeEach(() => {
+      define(Minimize.Tag, Minimize);
+    });
+
+    and("HTML Template is added to DOM", () => {
+      beforeEach(async () => {
+        await Minimize.Template.load("minimize.template.html");
+      });
+      afterEach(() => {
+        remove(Minimize.Tag);
+      });
+
+      and("a new minimize is added to DOM", () => {
+        let minimize: Minimize;
+        beforeEach(() => {
+          minimize = add<Minimize>(Minimize.Tag);
+        });
+        afterEach(() => {
+          minimize.remove();
+        });
+
+        when("user presses the pointer on `div` with class `icon`", () => {
+          beforeEach(() => {
+            const icon = minimize.root.querySelector(".icon") as HTMLElement;
+            icon.dispatchEvent(new PointerEvent(Gesture.POINTERDOWN));
+          });
+
+          then("`minimize.status` is `Status.PRESSED`", () => {
+            expect(minimize.status).toEqual(Status.PRESSED);
+          });
+        });
+      });
+    });
+  });
+});
