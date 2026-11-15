@@ -778,6 +778,25 @@ operation(Operation.SHOW, () => {
         then("`minimize.show` method exists", () => {
           expect(minimize.show).toBeDefined();
         });
+
+        and("`minimize.show` method exists", () => {
+          and("`minimize.visibility` is `Visibility.HIDDEN`", () => {
+            beforeEach(() => {
+              minimize.visibility = Visibility.HIDDEN;
+            });
+
+            when("invoking `minimize.show`", () => {
+              let result: unknown;
+              beforeEach(() => {
+                result = minimize.show();
+              });
+
+              then("`minimize.visibility` is `Visibility.VISIBLE`", () => {
+                expect(minimize.visibility).toBe(Visibility.VISIBLE);
+              });
+            });
+          });
+        });
       });
     });
   });
