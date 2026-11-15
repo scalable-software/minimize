@@ -327,6 +327,16 @@ state(State.VISIBILITY, () => {
             );
           });
 
+          when("`visibility` attribute is set to `Visibility.VISIBLE`", () => {
+            beforeEach(() => {
+              minimize.setAttribute(Attributes.VISIBILITY, Visibility.VISIBLE);
+            });
+
+            then("`visibility` attribute does not exist", () => {
+              expect(minimize.hasAttribute(Attributes.VISIBILITY)).toBeFalse();
+            });
+          });
+
           and("`minimize.visibility` is set to `Visibility.HIDDEN`", () => {
             beforeEach(() => {
               minimize.visibility = Visibility.HIDDEN;
