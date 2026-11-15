@@ -601,6 +601,37 @@ state(State.APPEARANCE, () => {
             });
           });
 
+          when("`appearance` attribute is set to `invalid`", () => {
+            beforeEach(async () => {
+              await jasmine.spyOnGlobalErrorsAsync(async () => {
+                minimize.setAttribute(Attributes.APPEARANCE, "invalid");
+              });
+            });
+
+            then("`appearance` attribute does not exist", () => {
+              expect(minimize.hasAttribute(Attributes.APPEARANCE)).toBeFalse();
+            });
+          });
+
+          and("`minimize.appearance` is set to `Appearance.FLAT`", () => {
+            beforeEach(() => {
+              minimize.appearance = Appearance.FLAT;
+            });
+
+            when("`appearance` attribute is set to `invalid`", () => {
+              beforeEach(async () => {
+                await jasmine.spyOnGlobalErrorsAsync(async () => {
+                  minimize.setAttribute(Attributes.APPEARANCE, "invalid");
+                });
+              });
+
+              then("`appearance` attribute is `Appearance.FLAT`", () => {
+                const value = minimize.getAttribute(Attributes.APPEARANCE);
+                expect(value).toBe(Appearance.FLAT);
+              });
+            });
+          });
+
           when("`minimize.appearance` is set to `invalid`", () => {
             let error: Error;
             beforeEach(() => {
