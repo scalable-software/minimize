@@ -245,6 +245,22 @@ state(State.VISIBILITY, () => {
         then("`visibility` attribute does not exist", () => {
           expect(minimize.hasAttribute(Attributes.VISIBILITY)).toBeFalse();
         });
+
+        then("`minimize.visibility` setter exists", () => {
+          expect(hasSetter(minimize, "visibility")).toBeTrue();
+        });
+
+        and("`minimize.visibility` setter exists", () => {
+          when("`minimize.visibility` is set to `Visibility.HIDDEN`", () => {
+            beforeEach(() => {
+              minimize.visibility = Visibility.HIDDEN;
+            });
+
+            then("`minimize.visibility` is `Visibility.HIDDEN`", () => {
+              expect(minimize.visibility).toBe(Visibility.HIDDEN);
+            });
+          });
+        });
       });
     });
   });
