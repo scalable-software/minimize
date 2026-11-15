@@ -8,7 +8,8 @@ export {
   Appearance,
   Operation,
   Event,
-  Gesture
+  Gesture,
+  Key
 } from "./minimize.meta.js";
 
 export { Validate } from "./minimize.validation.js";
