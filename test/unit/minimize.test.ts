@@ -1724,6 +1724,15 @@ gesture(Gesture.KEYUP, () => {
             then("`onminimize` is called once", () => {
               expect(onminimize).toHaveBeenCalledTimes(1);
             });
+
+            then("`minimize.status` is `Status.RELEASED`", () => {
+              expect(minimize.status).toEqual(Status.RELEASED);
+            });
+
+            then("`status` attribute is `Status.RELEASED`", () => {
+              const value = minimize.getAttribute(Attributes.STATUS);
+              expect(value).toBe(Status.RELEASED);
+            });
           });
         });
 
