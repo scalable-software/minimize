@@ -90,6 +90,13 @@ composition(Composition.TEMPLATE, () => {
         then("minimize.root contents contains template contents", () => {
           expect(minimize.root.innerHTML).toContain(template.innerHTML);
         });
+
+        and("`minimize.root` contents contains template contents", () => {
+          then("`minimize.root` contains `div.icon`", () => {
+            const div = minimize.root.querySelector("div.icon");
+            expect(div).not.toBeNull();
+          });
+        });
       });
     });
   });
