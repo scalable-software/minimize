@@ -408,10 +408,10 @@ export class Minimize extends Component implements Meta {
   };
 
   /**
-   * Handles a key lifted from the icon: Enter requests minimizing
+   * Handles a key lifted from the icon: Enter or Space requests minimizing
    * @category Gesture
    * @hidden
    */
   private _handleIconKeyupMinimize = (event: KeyboardEvent) =>
-    event.key === Key.ENTER && this.minimize();
+    (event.key === Key.ENTER || event.key === Key.SPACE) && this.minimize();
 }
