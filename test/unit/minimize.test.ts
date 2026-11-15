@@ -1314,6 +1314,11 @@ gesture(Gesture.POINTERDOWN, () => {
           then("`minimize.status` is `Status.PRESSED`", () => {
             expect(minimize.status).toEqual(Status.PRESSED);
           });
+
+          then("`status` attribute is `Status.PRESSED`", () => {
+            const value = minimize.getAttribute(Attributes.STATUS);
+            expect(value).toBe(Status.PRESSED);
+          });
         });
       });
     });
