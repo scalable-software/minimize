@@ -1526,13 +1526,16 @@ gesture(Gesture.KEYDOWN, () => {
 
         when("user presses `Key.ENTER` on `div` with class `icon`", () => {
           let onminimize: jasmine.Spy;
+          let event: KeyboardEvent;
           beforeEach(() => {
             onminimize = jasmine.createSpy("onminimize");
             minimize.onminimize = onminimize;
             const icon = minimize.root.querySelector(".icon") as HTMLElement;
-            icon.dispatchEvent(
-              new KeyboardEvent(Gesture.KEYDOWN, { key: Key.ENTER })
-            );
+            event = new KeyboardEvent(Gesture.KEYDOWN, {
+              key: Key.ENTER,
+              cancelable: true
+            });
+            icon.dispatchEvent(event);
           });
 
           then("`minimize.status` is `Status.PRESSED`", () => {
@@ -1546,18 +1549,25 @@ gesture(Gesture.KEYDOWN, () => {
 
           then("`onminimize` is not called", () => {
             expect(onminimize).not.toHaveBeenCalled();
+          });
+
+          then("the default action of the key is prevented", () => {
+            expect(event.defaultPrevented).toBeTrue();
           });
         });
 
         when("user presses `Key.SPACE` on `div` with class `icon`", () => {
           let onminimize: jasmine.Spy;
+          let event: KeyboardEvent;
           beforeEach(() => {
             onminimize = jasmine.createSpy("onminimize");
             minimize.onminimize = onminimize;
             const icon = minimize.root.querySelector(".icon") as HTMLElement;
-            icon.dispatchEvent(
-              new KeyboardEvent(Gesture.KEYDOWN, { key: Key.SPACE })
-            );
+            event = new KeyboardEvent(Gesture.KEYDOWN, {
+              key: Key.SPACE,
+              cancelable: true
+            });
+            icon.dispatchEvent(event);
           });
 
           then("`minimize.status` is `Status.PRESSED`", () => {
@@ -1571,6 +1581,10 @@ gesture(Gesture.KEYDOWN, () => {
 
           then("`onminimize` is not called", () => {
             expect(onminimize).not.toHaveBeenCalled();
+          });
+
+          then("the default action of the key is prevented", () => {
+            expect(event.defaultPrevented).toBeTrue();
           });
         });
 
