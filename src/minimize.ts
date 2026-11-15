@@ -94,6 +94,13 @@ export class Minimize extends Component implements Meta {
   private _onhide: EventListener | null = null;
 
   /**
+   * onshow triggered when minimize visibility changes to visible
+   * @category Events
+   * @hidden
+   */
+  private _onshow: EventListener | null = null;
+
+  /**
    * Cache element references to improve performance
    * @category State
    * @hidden
@@ -183,6 +190,15 @@ export class Minimize extends Component implements Meta {
    */
   public set onhide(handler: EventListener | null) {
     this._onhide = this._subscribe(Event.ON_HIDE, this._onhide, handler);
+  }
+
+  /**
+   * Triggered via `.show()`
+   * @event
+   * @category Events
+   */
+  public set onshow(handler: EventListener | null) {
+    this._onshow = this._subscribe(Event.ON_SHOW, this._onshow, handler);
   }
 
   /**
