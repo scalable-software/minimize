@@ -1771,6 +1771,33 @@ gesture(Gesture.KEYUP, () => {
             expect(minimize.status).toEqual(Status.RELEASED);
           });
         });
+
+        and("user presses `Key.ENTER` on `div` with class `icon`", () => {
+          beforeEach(() => {
+            const icon = minimize.root.querySelector(".icon") as HTMLElement;
+            icon.dispatchEvent(
+              new KeyboardEvent(Gesture.KEYDOWN, { key: Key.ENTER })
+            );
+          });
+
+          when("user lifts another key from `div` with class `icon`", () => {
+            let onminimize: jasmine.Spy;
+            beforeEach(() => {
+              onminimize = jasmine.createSpy("onminimize");
+              minimize.onminimize = onminimize;
+              const icon = minimize.root.querySelector(".icon") as HTMLElement;
+              icon.dispatchEvent(new KeyboardEvent(Gesture.KEYUP, { key: "a" }));
+            });
+
+            then("`onminimize` is not called", () => {
+              expect(onminimize).not.toHaveBeenCalled();
+            });
+
+            then("`minimize.status` is `Status.PRESSED`", () => {
+              expect(minimize.status).toEqual(Status.PRESSED);
+            });
+          });
+        });
       });
     });
   });
