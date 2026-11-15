@@ -11,7 +11,8 @@ import {
   Appearance,
   Operation,
   Event,
-  Gesture
+  Gesture,
+  Key
 } from "@scalable.software/minimize";
 
 // Configuration
@@ -1489,6 +1490,49 @@ gesture(Gesture.CLICK, () => {
 
           then("`onminimize` is called twice", () => {
             expect(onminimize).toHaveBeenCalledTimes(2);
+          });
+        });
+      });
+    });
+  });
+});
+
+gesture(Gesture.KEYDOWN, () => {
+  and("Minimize is defined in custom element registry", () => {
+    beforeEach(() => {
+      define(Minimize.Tag, Minimize);
+    });
+
+    and("HTML Template is added to DOM", () => {
+      beforeEach(async () => {
+        await Minimize.Template.load("minimize.template.html");
+      });
+      afterEach(() => {
+        remove(Minimize.Tag);
+      });
+
+      and("a new minimize is added to DOM", () => {
+        let minimize: Minimize;
+        beforeEach(() => {
+          minimize = add<Minimize>(Minimize.Tag);
+        });
+        afterEach(() => {
+          minimize.remove();
+        });
+
+        when("user presses `Key.ENTER` on `div` with class `icon`", () => {
+          let onminimize: jasmine.Spy;
+          beforeEach(() => {
+            onminimize = jasmine.createSpy("onminimize");
+            minimize.onminimize = onminimize;
+            const icon = minimize.root.querySelector(".icon") as HTMLElement;
+            icon.dispatchEvent(
+              new KeyboardEvent(Gesture.KEYDOWN, { key: Key.ENTER })
+            );
+          });
+
+          then("`onminimize` is called", () => {
+            expect(onminimize).toHaveBeenCalled();
           });
         });
       });
