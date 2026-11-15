@@ -7,7 +7,9 @@ import { Component, Template } from "@scalable.software/component";
 import { type Configuration } from "@scalable.software/component";
 
 // Minimize Metadata
-import { Tag, CSS, Attributes } from "./minimize.meta.js";
+import { Tag, CSS, Attributes, Visibility } from "./minimize.meta.js";
+
+import { type Meta } from "./minimize.meta.js";
 
 /**
  * Optional Configuration: required for minimize buttons with custom layout and style
@@ -26,7 +28,7 @@ export const configuration: Configuration = {
 /**
  * @category Minimize
  */
-export class Minimize extends Component {
+export class Minimize extends Component implements Meta {
   /**
    * The tag name of the minimize button
    * @category Configuration
@@ -50,6 +52,14 @@ export class Minimize extends Component {
   public static Template = new Template(import.meta.url);
 
   /**
+   * Internal Visibility state of the component
+   * @category State
+   * @default Visibility.VISIBLE
+   * @hidden
+   */
+  private _visibility: Visibility = Visibility.VISIBLE;
+
+  /**
    * Cache element references to improve performance
    * @category State
    * @hidden
@@ -61,6 +71,14 @@ export class Minimize extends Component {
    */
   constructor() {
     super(configuration);
+  }
+
+  /**
+   * Get the visibility of the minimize button
+   * @category State
+   */
+  public get visibility(): Visibility {
+    return this._visibility;
   }
 
   /**
