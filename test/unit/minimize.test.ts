@@ -1588,6 +1588,32 @@ gesture(Gesture.KEYDOWN, () => {
           });
         });
 
+        when("user holds `Key.ENTER` down on `div` with class `icon`", () => {
+          let onminimize: jasmine.Spy;
+          beforeEach(() => {
+            onminimize = jasmine.createSpy("onminimize");
+            minimize.onminimize = onminimize;
+            const icon = minimize.root.querySelector(".icon") as HTMLElement;
+            icon.dispatchEvent(
+              new KeyboardEvent(Gesture.KEYDOWN, { key: Key.ENTER })
+            );
+            icon.dispatchEvent(
+              new KeyboardEvent(Gesture.KEYDOWN, { key: Key.ENTER, repeat: true })
+            );
+            icon.dispatchEvent(
+              new KeyboardEvent(Gesture.KEYDOWN, { key: Key.ENTER, repeat: true })
+            );
+          });
+
+          then("`minimize.status` is `Status.PRESSED`", () => {
+            expect(minimize.status).toEqual(Status.PRESSED);
+          });
+
+          then("`onminimize` is not called", () => {
+            expect(onminimize).not.toHaveBeenCalled();
+          });
+        });
+
         when("user presses another key on `div` with class `icon`", () => {
           let onminimize: jasmine.Spy;
           let event: KeyboardEvent;
