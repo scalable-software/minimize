@@ -1717,6 +1717,42 @@ gesture(Gesture.KEYUP, () => {
             });
           });
         });
+
+        when("user lifts `Key.ENTER` from `div` with class `icon` without pressing it", () => {
+          let onminimize: jasmine.Spy;
+          beforeEach(() => {
+            onminimize = jasmine.createSpy("onminimize");
+            minimize.onminimize = onminimize;
+            const icon = minimize.root.querySelector(".icon") as HTMLElement;
+            icon.dispatchEvent(new KeyboardEvent(Gesture.KEYUP, { key: Key.ENTER }));
+          });
+
+          then("`onminimize` is not called", () => {
+            expect(onminimize).not.toHaveBeenCalled();
+          });
+
+          then("`minimize.status` is `Status.RELEASED`", () => {
+            expect(minimize.status).toEqual(Status.RELEASED);
+          });
+        });
+
+        when("user lifts `Key.SPACE` from `div` with class `icon` without pressing it", () => {
+          let onminimize: jasmine.Spy;
+          beforeEach(() => {
+            onminimize = jasmine.createSpy("onminimize");
+            minimize.onminimize = onminimize;
+            const icon = minimize.root.querySelector(".icon") as HTMLElement;
+            icon.dispatchEvent(new KeyboardEvent(Gesture.KEYUP, { key: Key.SPACE }));
+          });
+
+          then("`onminimize` is not called", () => {
+            expect(onminimize).not.toHaveBeenCalled();
+          });
+
+          then("`minimize.status` is `Status.RELEASED`", () => {
+            expect(minimize.status).toEqual(Status.RELEASED);
+          });
+        });
       });
     });
   });
