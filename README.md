@@ -99,8 +99,8 @@ For more details on **States**, **Operations**, and **Events**, consult the sect
 
 ### 3.1 Composition
 
-- **Template** (`minimize.template.html`): Defines DOM structure — a `.icon` container, focusable and announced as a button named "Minimize", holding the SVG icon of a single horizontal line.
-- **Style** (`minimize.style.css`): Encapsulates appearance, including the pressed look, hover effects, the flat appearance, and light/dark theme adaptation.
+- **Template** (`minimize.template.html`): Defines DOM structure — a `.icon` container, focusable and announced as a button named "Minimize", holding the SVG icon of a single horizontal line. Its one style rule, `:host { display: none; }`, keeps the minimize hidden until its stylesheet applies, so the minimize is never seen unstyled.
+- **Style** (`minimize.style.css`): Encapsulates appearance, including the pressed look, hover effects, the flat appearance, and light/dark theme adaptation. Its rule `:host(:defined) { display: inline-block; }` reveals the minimize; a stylesheet that replaces this one must carry that rule, or the minimize stays hidden.
 - **Class** (`minimize.ts`): Extends the base component class to handle lifecycle hooks, Shadow DOM creation, attribute reflection, and event dispatch.
 
 > **Separation of Concerns**
